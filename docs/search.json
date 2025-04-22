@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "about project.html",
+    "href": "about project.html",
+    "title": "437 Project",
+    "section": "",
+    "text": "{{&lt; lipsum 1 &gt;}}"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Andrea Garcia",
+    "section": "",
+    "text": "Welcome to My Website\nHi, I’m Andrea! I am a Math major concentrating in Probability and Statistics.\nCheck out my project and feel free to reach out!\nCheck out my GitHub repository."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Andrea Garcia",
+    "section": "Education",
+    "text": "Education\nCalifornia State Univerity, Fullerton | Fullerton, CA\nBachelors of Arts in Mathematics | August 2020 - May 2025\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "Untitled.html",
+    "href": "Untitled.html",
+    "title": "437 Project",
+    "section": "",
+    "text": "{{&lt; lipsum 1 &gt;}}"
+  }
+]

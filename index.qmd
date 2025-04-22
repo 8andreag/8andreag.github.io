@@ -1,0 +1,30 @@
+---
+title: "Andrea Garcia"
+subtite: "Student Data Scientist"
+about:
+  template: trestles
+  image: profile.jpg
+  image-shape: round
+  links: 
+    - icon: github
+      text: Github
+      href: https://github.com/8andreag/my-project
+---
+
+Welcome to My Website
+
+Hi, I'm Andrea! I am a Math major concentrating in Probability and Statistics.
+
+Check out my project and feel free to reach out!
+
+Check out my [GitHub repository](https://github.com/8andreag/my-project).
+
+## Education
+
+California State Univerity, Fullerton | Fullerton, CA
+
+Bachelors of Arts in Mathematics | August 2020 - May 2025
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

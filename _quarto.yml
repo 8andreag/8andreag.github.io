@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: docs
+  
+website:
+  title: "Home"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - href: about project.qmd
+    tools:
+      - icon: github
+        href: github.com
+
+format:
+  html:
+    fontcolor: "black"
+    linkcolor: "black"
+    mainfont: "sarif"
+    fontsize: 18px
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
