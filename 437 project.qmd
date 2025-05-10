@@ -1,5 +1,9 @@
 ---
-title: 437 Project
+title: "Replace this with an interesting title"
 ---
 
-{{< lipsum 1 >}}
+## Motivation and Context
+
+```{r}
+here::i_am("437 project.qmd")
+```
