@@ -2,16 +2,17 @@
 title: Statistical Learning Project
 ---
 
-
-
-
+```{r}
+here::i_am("about project.qmd")
+```
 
 ## Motivation and Context
 
-```{r}
-here::i_am("437 project.qmd")
-```
+I find this topic interesting because I love learning and don't want to stop learning and I would like to for more people to be motivated to learn. By studying the factors that influence student performance, we can gain insights into why some students excel while others struggle, ultimately helping to improve the education system. One question that has always lingered in my mind, but that I’ve never formally researched, is how a person’s upbringing affects their perspective on and performance in education. I think about this quite often because I worked at a school as a math tutor with elementary and middle school students, particularly with the students who were struggling academically, had behavioral challenges, or lacked motivation. Many of these students would only engage in learning when they were pulled out of the classroom for one-on-one instruction. And from this experience I was learning that a student’s academic struggles often have deeper roots, some had difficult home lives, some simply needed individual attention, some had parents who worked long hours and couldn’t help with homework, some had parents who weren't able to help from a lack of completing school themselves, and, unfortunately, some had parents who didn’t prioritize education, which in turn influenced the student’s attitude toward school. This issue is not just something I observed in others but it also something I can relate to from my own experiences. Coming from a family that prioritized work over education, with parents who are not educated, I had a difficult time in elementary school and often felt disengaged. As a first-generation college student, I have, at times, felt discouraged, incapable, embarrassed, or unqualified, a lot of the reasons for these feelings are because of my background as a first-gen, female, minority student. But my personal experience in school growing up has instilled my current perspective and motivated me on being educated. I used to not like school in elementary, but I am now grateful to have an opportunity to go to college and become educated. Beyond my personal connection, I believe many others would find this topic relevant because education shapes the future. Understanding the factors behind academic success or failure, especially across different demographics, can help educators, policymakers, and communities better support students and create a more equitable learning environment. The younger generations are our future.
 
+*What are key determinants of student performance in school?*
+
+I am interested in finding relationships between a students demographics, parental education, study habits, and school support/environment influence their academic performance.
 ## Main Objective
 
 ## Packages Used In This Analysis
