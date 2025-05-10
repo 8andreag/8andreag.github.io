@@ -7,7 +7,7 @@ editor: visual
 here::i_am("about project.qmd")
 ```
 
-I HOPE THIS WORKS
+I HOPE THIS WORKSss
 
 ## Motivation and Context
 
