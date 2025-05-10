@@ -2,3 +2,118 @@
 title: "437proj"
 editor: visual
 ---
+
+```{r}
+here::i_am("about project.qmd")
+```
+
+I HOPE THIS WORKS
+
+## Motivation and Context
+
+For my project I wanted to explore if different kinds of environments/backgrounds/upbrinings that children have has an effect on how well a student performs in school. This is something I think is worth researching not just because I believe education is important but because it is a little personal. I find this topic interesting because I love learning but I didn't always love learning in school when I was younger. If you had asked elementary me if I liked school I would've said no but I love school now don't want to stop learning and I would like to for more people to be motivated to learn.
+
+I feel that I did not have the best relationship with school and it was for a reason. I believe that by studying the factors that influence student performance, we can gain insights into why some students excel while others struggle, ultimately helping to improve the education system. One question that has always lingered in my mind, but that I’ve never formally researched, is how a person’s upbringing affects their perspective on and performance in education. I think about this quite often because I worked at a school as a math tutor with elementary and middle school students, particularly with the students who were struggling academically, had behavioral challenges, or lacked motivation. Many of these students would only engage in learning when they were pulled out of the classroom for one-on-one instruction. And from this experience I was learning that a student’s academic struggles often have deeper roots, some had difficult home lives, some simply needed individual attention, some had parents who worked long hours and couldn’t help with homework, some had parents who weren't able to help from a lack of completing school themselves, and, unfortunately, some had parents who didn’t prioritize education, which in turn influenced the student’s attitude toward school.
+
+This issue is not just something I observed in others but it also something I can relate to from my own experiences. Coming from a family with parents who are not educated, I had a difficult time in elementary school and often felt disengaged. Even now, as a first-generation college student, I have, at times, felt discouraged, incapable, embarrassed, or unqualified, a lot of the reasons for these feelings are because of my background as a first-gen, female, minority student. But my personal experience in school growing up has instilled my current perspective and motivated me on being educated. I used to despise school in elementary, but I am now grateful to have an opportunity to go to college and become educated. Beyond my personal connection, I believe many others would find this topic relevant because education shapes the future. Understanding the factors behind academic success or failure, especially across different demographics, can help educators, policymakers, and communities better support students and create a more equitable learning environment. The younger generations are our future.
+
+## Main Objective
+
+The goal of this project is to investigate the key factors that influence student academic performance. Specifically, I am interested in exploring how a student’s demographics, parental education, study habits, and school support or environment contribute to their success or struggles in school. What separates a high-performing student from one who is underperforming? By analyzing these variables, I aim to identify meaningful patterns and relationships that can inform how we better support students in diverse educational settings.
+
+In short: *What are the key determinants of student performance in school?*
+
+## Packages Used In This Analysis
+
+```{r}
+#| label: load packages
+#| message: false
+#| warning: false
+
+library(here)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(rsample)
+library(tidymodels)
+library(tidyverse)
+library(tibble)
+library(naniar)
+library(softImpute)
+library(mice)
+```
+
+| Package                                          | Use                                           |
+|--------------------------------|----------------------------------------|
+| [here](https://github.com/jennybc/here_here)     | to easily load and save data                  |
+| [readr](https://readr.tidyverse.org/)            | to import the CSV file data                   |
+| [dplyr](https://dplyr.tidyverse.org/)            | to massage and summarize data                 |
+| [rsample](https://rsample.tidymodels.org/)       | to split data into training and test sets     |
+| [ggplot2](https://ggplot2.tidyverse.org/)        | to create nice-looking and informative graphs |
+| [tidymodels](https://tidymodels.tidymodels.org/) | for modeling                                  |
+| [tidyverse](https://tidyverse.tidyverse.org/)    | for creating and using models of all types    |
+| [tibble]()                                       |                                               |
+| [naniar]()                                       |                                               |
+| [softImpute]()                                   |                                               |
+| [mice]()                                         |                                               |
+
+## Data Description
+
+The dataset used in this project is the Portuguese Student Performance Data Set, available through education datasets on Kaggle and sourced from two secondary schools in Portugal The data was collected by researchers in 2005 and 2006 through surveys to analyze factors that influence student achievement, study patterns in student success, and explore the impact of socioeconomic and on learning outcomes in math and Portuguese language courses. It includes data on 649 students and captures a wide range of features such as demographics (age, sex, and address), family background (parental education and job), school support (extra tutoring, access to internet, travel time), personal habits (study time, free time, alcohol consumption), and academic performance across three grading periods: G1 (first trimester), G2 (second trimester), and G3 (final grade). This dataset provides a good foundation for analyzing how various personal and environmental factors influence academic outcomes.
+
+To understand my analysis, it’s also important to have some background knowledge about education systems, student performance metrics, and social factors that influence learning. In Portugal, and for this data in particular the target attribute G3 has a strong correlation with attributes G2 and G1. This occurs because G3 is the final year grade (issued at the 3rd trimester), while G1 and G2 correspond to the 1st and 2nd trimester grades. It is more difficult to predict G3 without G1 and G2. Grades are typically on a 0–20 scale, with 10 as the minimum passing mark. Compared to here in the U.S. high school years are generally sectioned into semesters and students receive letter grades A–F.
+
+Student performance refers to how well a student meets academic benchmarks, typically measured through grades. Performance can be influenced by various factors, including socioeconomic background, parental involvement, teaching quality, and individual learning styles.
+
+Socioeconomic background referes to an individual’s or family’s economic and social position relative to others, based on factors like income, education level, and occupation. Socioeconomic factors and parental education levels may have different impacts due to cultural and systemic differences.
+
+Demographics are Characteristics of a population, such as socioeconomic status, race, gender, and parental education, which can influence educational outcomes.
+
+```{r}
+#| label: import data
+#| warning: false
+student <- readr::read_csv(here::here("student-por.csv"))
+view(student)
+```
+
+### Data Limitations
+
+First, there may be biases in data collection methods. For example, self-reported study habits and parental involvement may not always be accurate because students or parents might overestimate or underestimate their efforts. Additionally, this data was collected from specific schools in a different country, which means the findings might not be generalizable to all student populations around the world or even here in the US.
+
+Second, is the mismatch between dataset variables and real-world educational experiences. For example, final grades may not reflect a student's true learning abilities or potential, as they can be having a difficult school year or does poorly on exams or doesn't do work for their grade.
+
+Third, geographic limitations could impact the model’s applicability. This data was collected in one country with one educational system that may not accurately reflect student performance in other areas due to cultural, economic, and policy differences. 
+
+Finally, and importantly, there are ethical limitations to using statistical models to predict or describe student performance. While such models can help identify students in need of support, they also risk reinforcing stereotypes or lowering expectations. For example, if a model predicts that students from working-class or less-educated families are likely to underperform, it could lead to those students being tracked into less rigorous programs or receiving less encouragement.
+
+This means that conclusions from my analysis may not be universally applicable and should be interpreted with these constraints in mind.
+
+## Data Wrangling (Optional Section)
+
+## Exploratory Data Analysis
+
+```{r}
+vis_miss(student[,1:33]) # default row and column order
+```
+
+```{r split training-test RMP}
+set.seed(180)
+student_split <- initial_split(student, prop = 0.80)  #splitting data  (random sample, 80%)
+student_train_tidy <- training(student_split)
+student_test_tidy <- testing(student_split)
+```
+
+```{r missing by variable}
+student_train_tidy |>
+  miss_var_summary()
+```
+
+## Modeling
+
+## Insights
+
+This would be especially troubling for students like me, who come from a background where education was not initially prioritized. A model might view someone like me as unlikely to succeed — but that prediction would miss personal motivation, resilience, and other unmeasured qualities. It raises the question: is a student “underperforming,” or is the model failing to capture their full potential? Predictive models must be used carefully, with awareness of both their value and their limitations, especially in high-stakes educational decisions.
+
+### Limitations and Future Work
+
+### Reflection (Optional Subsection)
