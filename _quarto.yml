@@ -1,14 +1,18 @@
 project:
   type: website
   output-dir: docs
-  
+  render: 
+    - index.qmd
+    - 437proj.qmd # this will render only the index and 
+    #437proj.qmd files into HTML for the website
 website:
   title: "Home"
   navbar:
     left:
       - text: Home
         href: index.qmd
-      - href: about project.qmd
+      - text: Math 437 Project
+        href: 437proj.qmd
     tools:
       - icon: github
         href: github.com
