@@ -21,9 +21,9 @@ Check out my [GitHub repository](https://github.com/8andreag/my-project).
 
 ## Education
 
-California State Univerity, Fullerton | Fullerton, CA
+California State Univerity, Fullerton \| Fullerton, CA
 
-Bachelors of Arts in Mathematics | August 2020 - May 2025
+Bachelors of Arts in Mathematics \| August 2020 - May 2025
 
 This is a Quarto website.
 

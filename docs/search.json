@@ -1,17 +1,17 @@
 [
   {
-    "objectID": "about project.html",
-    "href": "about project.html",
+    "objectID": "437proj.html",
+    "href": "437proj.html",
     "title": "437 Project",
     "section": "",
-    "text": "{{&lt; lipsum 1 &gt;}}"
+    "text": "This page will contain my Math 437 final project."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "Untitled.html",
+    "href": "Untitled.html",
+    "title": "437 Project",
     "section": "",
-    "text": "About this site"
+    "text": "This page will contain my Math 437 final project."
   },
   {
     "objectID": "index.html",
@@ -28,8 +28,15 @@
     "text": "Education\nCalifornia State Univerity, Fullerton | Fullerton, CA\nBachelors of Arts in Mathematics | August 2020 - May 2025\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   },
   {
-    "objectID": "Untitled.html",
-    "href": "Untitled.html",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "about project.html",
+    "href": "about project.html",
     "title": "437 Project",
     "section": "",
     "text": "{{&lt; lipsum 1 &gt;}}"
