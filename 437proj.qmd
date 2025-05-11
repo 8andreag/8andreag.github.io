@@ -4,14 +4,13 @@ editor: visual
 ---
 
 ```{r}
-here::i_am("about project.qmd")
+here::i_am("437proj.qmd")
 ```
 
-I HOPE THIS WORKSss
 
 ## Motivation and Context
 
-For my project I wanted to explore if different kinds of environments/backgrounds/upbrinings that children have has an effect on how well a student performs in school. This is something I think is worth researching not just because I believe education is important but because it is a little personal. I find this topic interesting because I love learning but I didn't always love learning in school when I was younger. If you had asked elementary me if I liked school I would've said no but I love school now don't want to stop learning and I would like to for more people to be motivated to learn.
+For my project I wanted to explore if different kinds of environments/backgrounds that children have has an effect on how well a student performs in school. This is something I think is worth researching not just because I believe education is important but because it is a little personal. I find this topic interesting because I love learning but I didn't always love learning in school when I was younger. If you had asked elementary me if I liked school I would've said no but I love school now don't want to stop learning and I would like to for more people to be motivated to learn.
 
 I feel that I did not have the best relationship with school and it was for a reason. I believe that by studying the factors that influence student performance, we can gain insights into why some students excel while others struggle, ultimately helping to improve the education system. One question that has always lingered in my mind, but that I’ve never formally researched, is how a person’s upbringing affects their perspective on and performance in education. I think about this quite often because I worked at a school as a math tutor with elementary and middle school students, particularly with the students who were struggling academically, had behavioral challenges, or lacked motivation. Many of these students would only engage in learning when they were pulled out of the classroom for one-on-one instruction. And from this experience I was learning that a student’s academic struggles often have deeper roots, some had difficult home lives, some simply needed individual attention, some had parents who worked long hours and couldn’t help with homework, some had parents who weren't able to help from a lack of completing school themselves, and, unfortunately, some had parents who didn’t prioritize education, which in turn influenced the student’s attitude toward school.
 
@@ -19,7 +18,7 @@ This issue is not just something I observed in others but it also something I ca
 
 ## Main Objective
 
-The goal of this project is to investigate the key factors that influence student academic performance. Specifically, I am interested in exploring how a student’s demographics, parental education, study habits, and school support or environment contribute to their success or struggles in school. What separates a high-performing student from one who is underperforming? By analyzing these variables, I aim to identify meaningful patterns and relationships that can inform how we better support students in diverse educational settings.
+The goal of this project is to investigate the key factors that influence student academic performance. Specifically, I am interested in exploring how a student’s demographics, parental education, study habits, and family support and environment contribute to their success or struggles in school. What separates a high-performing student from one who is underperforming? By analyzing these variables, I aim to identify meaningful patterns and relationships that can inform how we better support students in diverse educational settings.
 
 In short: *What are the key determinants of student performance in school?*
 
@@ -37,9 +36,10 @@ library(ggplot2)
 library(rsample)
 library(tidymodels)
 library(tidyverse)
-library(tibble)
+library(recipes) # don't need the rest of tidymodels
 library(naniar)
 library(softImpute)
+library(broom)
 library(mice)
 ```
 
@@ -59,22 +59,86 @@ library(mice)
 
 ## Data Description
 
-The dataset used in this project is the Portuguese Student Performance Data Set, available through education datasets on Kaggle and sourced from two secondary schools in Portugal The data was collected by researchers in 2005 and 2006 through surveys to analyze factors that influence student achievement, study patterns in student success, and explore the impact of socioeconomic and on learning outcomes in math and Portuguese language courses. It includes data on 649 students and captures a wide range of features such as demographics (age, sex, and address), family background (parental education and job), school support (extra tutoring, access to internet, travel time), personal habits (study time, free time, alcohol consumption), and academic performance across three grading periods: G1 (first trimester), G2 (second trimester), and G3 (final grade). This dataset provides a good foundation for analyzing how various personal and environmental factors influence academic outcomes.
+The dataset used in this project is the Portuguese Student Performance Data Set, available through education datasets on Kaggle and sourced from two secondary schools in Portugal. The data was collected by researchers in 2005 and 2006 through surveys to analyze factors that influence student achievement, study patterns in student success, and explore the impact of socioeconomic and on learning outcomes in math and Portuguese language courses. It includes data on 649 students and captures a wide range of features such as demographics (age, sex, and address), family background (parental education and job), school support (extra tutoring, access to internet, travel time), personal habits (study time, free time, alcohol consumption), and academic performance across three grading periods: G1 (first trimester), G2 (second trimester), and G3 (final grade). This dataset provides a good foundation for analyzing how various personal and environmental factors influence academic outcomes.
 
-To understand my analysis, it’s also important to have some background knowledge about education systems, student performance metrics, and social factors that influence learning. In Portugal, and for this data in particular the target attribute G3 has a strong correlation with attributes G2 and G1. This occurs because G3 is the final year grade (issued at the 3rd trimester), while G1 and G2 correspond to the 1st and 2nd trimester grades. It is more difficult to predict G3 without G1 and G2. Grades are typically on a 0–20 scale, with 10 as the minimum passing mark. Compared to here in the U.S. high school years are generally sectioned into semesters and students receive letter grades A–F.
+To understand my analysis, it’s also important to have some background knowledge about education systems, student performance metrics, and social factors that influence learning. In Portugal, and for this data in particular the target attribute G3 has a strong correlation with attributes G2 and G1. This occurs because G3 is the final year grade (issued at the 3rd trimester), while G1 and G2 correspond to the 1st and 2nd trimester grades. It is more difficult to predict G3 without G1 and G2. $\textbf{Grades are typically on a 0–20 scale, with 10 as the minimum passing mark.}$ $\textbf{Compared to here in the U.S. high school years are generally sectioned}$ $\textbf{into semesters and students receive letter grades A, B, C, D, or F.}$
 
-Student performance refers to how well a student meets academic benchmarks, typically measured through grades. Performance can be influenced by various factors, including socioeconomic background, parental involvement, teaching quality, and individual learning styles.
+Student performance refers to how well a student meets academic benchmarks, typically measured through grades. Performance can be influenced by various factors, including socioeconomic background, parental involvement, and individual learning styles.
 
 Socioeconomic background referes to an individual’s or family’s economic and social position relative to others, based on factors like income, education level, and occupation. Socioeconomic factors and parental education levels may have different impacts due to cultural and systemic differences.
-
-Demographics are Characteristics of a population, such as socioeconomic status, race, gender, and parental education, which can influence educational outcomes.
 
 ```{r}
 #| label: import data
 #| warning: false
-student <- readr::read_csv(here::here("student-por.csv"))
-view(student)
+data <- readr::read_csv(here::here("student-por.csv"))
+data
 ```
+
+$\textbf{The data includes:}$
+
+* Two public schools in Portugal: Gabriel Pereira $\textbf{(GP)}$ and Mouzinho da Silveira $\textbf{(MS)}$
+
+* $\textbf{school:}$ student's school (binary: 'GP' - Gabriel Pereira or 'MS' - Mousinho da Silveira)
+
+* $\textbf{sex:}$ student's sex (binary: 'F' - female or 'M' - male)
+
+* $\textbf{age:}$ student's age (numeric: from 15 to 22)
+
+* $\textbf{address:}$ student's home address type (binary: 'U' - urban or 'R' - rural)
+
+* $\textbf{famsize:}$ family size (binary: 'LE3' - ≤ 3 or 'GT3' - > 3)
+
+* $\textbf{Pstatus:}$ parent's cohabitation status (binary: 'T' - living together or 'A' - apart)
+
+* $\textbf{Medu:}$ mother's education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade 3-> secondary education or 4-higher education)
+
+* $\textbf{Fedu:}$ father's education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade, 3 - secondary education or 4- higher education)
+
+* $\textbf{Mjob:}$ mother's job (nominal: 'teacher', 'health' care related, civil 'services' (e.g. administrative or police), 'at_home' or 'other')
+
+* $\textbf{Fjob:}$ father's job (nominal: 'teacher', 'health' care related, civil 'services' (administrative or police), 'at_home' or 'other')
+
+* $\textbf{reason:}$ reason to choose this school (nominal: close to 'home', school 'reputation', 'course' preference or 'other')
+
+* $\textbf{guardian:}$ student's guardian (nominal: 'mother', 'father' or 'other')
+
+* $\textbf{traveltime:}$ home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
+
+* $\textbf{studytime:}$ weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) failures: number of past class failures (numeric: n if 1<=n<3, else 4)
+
+* $\textbf{schoolsup:}$ extra educational support (binary: yes or no)
+
+* $\textbf{famsup:}$ family educational support (binary: yes or no)
+
+* $\textbf{paid:}$ extra paid classes within the course subject (Math or Portuguese) (binary: yes or no)
+
+* $\textbf{activities:}$ extra-curricular activities (binary: yes or no)
+
+* $\textbf{nursery:}$ attended nursery school (binary: yes or no) higher: wants to take higher education (binary: yes or no)
+
+* $\textbf{internet:}$ Internet access at home (binary: yes or no)
+
+* $\textbf{romantic:}$ with a romantic relationship (binary: yes or no)
+
+* $\textbf{famrel:}$ quality of family relationships (numeric: from 1 - very bad to 5 - excellent)
+
+* $\textbf{freetime:}$ free time after school (numeric: from 1 - very low to 5 - very high)
+
+* $\textbf{goout:}$ going out with friends (numeric: from 1 - very low to 5 - very high)
+
+* $\textbf{Dalc:}$ workday alcohol consumption (numeric: from 1 - very low to 5 - very high)
+
+* $\textbf{Walc:}$ weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)
+
+* $\textbf{health:}$ current health status (numeric: from 1 - very bad to 5 - very good)
+
+* $\textbf{absences:}$ number of school absences (numeric: from 0 to 93)
+
+* $\textbf{G1:}$ first period grade (numeric: from 0 to 20)
+
+* $\textbf{G2:}$ second period grade (numeric: from 0 to 20)
+
+* $\textbf{G3:}$ final grade (numeric: from 0 to 20, output target)
 
 ### Data Limitations
 
@@ -88,27 +152,471 @@ Finally, and importantly, there are ethical limitations to using statistical mod
 
 This means that conclusions from my analysis may not be universally applicable and should be interpreted with these constraints in mind.
 
-## Data Wrangling (Optional Section)
+## Data Wrangling
+
+$\textbf{We will be working with just a few varaibles:}$
+
+* $\textbf{Pstatus:}$ parent's cohabitation status (binary: 'T' - living together or 'A' - apart)
+
+* $\textbf{Medu:}$ mother's education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade 3-> secondary education or 4-higher education)
+
+* $\textbf{Fedu:}$ father's education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade, 3 - secondary education or 4- higher education)
+
+* $\textbf{guardian:}$ student's guardian (nominal: 'mother', 'father' or 'other')
+
+* $\textbf{studytime:}$ weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) failures: number of past class failures (numeric: n if 1<=n<3, else 4)
+
+* $\textbf{famsup:}$ family educational support (binary: yes or no)
+
+$\textbf{The main response variables will be:}$
+
+* $\textbf{G1:}$ first period grade (numeric: from 0 to 20)
+
+* $\textbf{G2:}$ second period grade (numeric: from 0 to 20)
+
+* $\textbf{G3:}$ final grade (numeric: from 0 to 20, output target)
+
+These are variables I think are important predictors for academic performance, as study time, parental education and family support can significantly impact a student’s success.
+
+```{r}
+vis_miss(data[,1:33]) # default row and column order
+```
+
+```{r}
+student <- data |> 
+  select(Pstatus, Fedu, Medu, guardian, studytime, famsup, G1, G2, G3)
+
+student <- student |>
+  mutate(
+    Pstatus = as.factor(Pstatus),
+    guardian = as.factor(guardian),
+    studytime = as.factor(studytime),
+    famsup = as.factor(famsup)
+  )
+student
+```
+
+```{r split training-test RMP}
+set.seed(123)
+student_split <- initial_split(student, prop = 0.80)  #splitting data  (random sample, 80%)
+student_train <- training(student_split)
+student_test <- testing(student_split)
+```
+
+```{r missing by variable}
+student_train |>
+  miss_var_summary()
+```
+
+Since there is no missing data it does not makes sense to remove or impute any missing data. 
 
 ## Exploratory Data Analysis
 
 ```{r}
-vis_miss(student[,1:33]) # default row and column order
+table(student_train$famsup)
+ggplot(data = student_train, 
+       mapping = aes(
+         x = famsup,
+         fill = famsup
+         )
+       ) +
+  geom_bar() +
+  labs(title = "Distribution of Family Support", x = "Family Support", y = "Count") 
 ```
 
-```{r split training-test RMP}
-set.seed(180)
-student_split <- initial_split(student, prop = 0.80)  #splitting data  (random sample, 80%)
-student_train_tidy <- training(student_split)
-student_test_tidy <- testing(student_split)
+I was interested in finding out how many students in this dataset receive support form their family and those who do not. It appears that in this dataset there are 319 students who do receive academic support form their family, more than students who do not, 200. This will help us understand the balance in the dataset and whether family support plays a role in student performance. 
+
+Naturally, I thought the next step should be to visualize and compare the tendency and spread of this variable across G1 G2 and G3 to see if family support results in better academic performance.
+
+```{r}
+student_G123 <- student_train |>
+  pivot_longer(cols = c(G1, G2, G3), 
+               names_to = "Term", 
+               values_to = "Grade")
 ```
 
-```{r missing by variable}
-student_train_tidy |>
-  miss_var_summary()
+```{r}
+ggplot(student_G123, 
+       mapping = aes(
+         x = famsup, 
+         y = Grade, 
+         fill = famsup
+         )
+       ) +
+  geom_boxplot() +
+  facet_wrap(~ Term) +  
+  labs(title = "Grade Distribution by Family Support Across Terms",
+       x = "Family Support",
+       y = "Grade")
+
+means_by_group <- student_G123 |>
+  group_by(Term, famsup) |>
+  summarise(mean_grade = mean(Grade, na.rm = TRUE), .groups = "drop")
+means_by_group
 ```
+
+Based on the boxplots, there does not seem to be a significant difference in academic achievement based on whether or not a student receives academic support from their family. The mean for G1 grades in group `no` is 11.4 and the mean in group `yes` is 11.6. The mean is higher for the `yes` group but this may be due to the fact that there are more students who have family support than those who don't. The means are fairly close. The mean for G2 grades in group `no` is 11.5 and the mean in group `yes` is 11.8. The mean is higher for the `yes` group. The means for G2 grades are also fairly close. The same can be said about grades for G3 grades. The mean for G3 grades in group `no` is 11.7 and the mean in group `yes` is 12.3. 
+
+I also created a bar graph for more visual evidence. They seem very similar to each other. Family support may play a role in student performance.
+
+```{r}
+ggplot(data = student_G123,
+       mapping = aes(
+         x = Grade,
+         fill = famsup)
+       ) +
+geom_histogram(binwidth = 1) +
+facet_grid(
+rows = vars(famsup), cols = vars(Term)
+)
+```
+The bar graphs also seem to have similar distributions but we can also see that the `yes` group for all the grades has a higher count. 
+
+Since no strong association was found, I decided to see if parental education was associated with academic success. My initial assumption without exploring the data is that the higher the education that parents received the more likely the student will follow in their footsteps and have better chances of academic success.
+
+```{r}
+student_train |>
+  group_by(Fedu) |>
+  summarise(mean_G3 = mean(G3, na.rm = TRUE),
+            count = n())
+
+ggplot(data = student_G123, 
+       mapping = aes(
+         x = Fedu,
+         fill = famsup
+         )
+       ) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Distribution of Father's Education", x = "Education Level", y = "Count")
+
+student_train |>
+  group_by(Medu) |>
+  summarise(mean_G3 = mean(G3, na.rm = TRUE),
+            count = n())
+
+ggplot(data = student_G123, 
+       mapping = aes(
+         x = Medu,
+         fill = famsup)
+       ) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Distribution of Mother's Education", x = "Education Level", y = "Count") 
+```
+The mean final grade (G3) for each level of Fedu:
+
+* 0 (no education): average final grade is 13
+
+* 1 (primary education up to 4th grade): average final grade is 11.2
+
+* 2 (primary education 5th to 9th grade): average final grade is 11.8
+
+* 3 (secondary education 10th to 12th): average final grade is 12.7
+
+*4 (higher education): average final grade is 12.9
+
+The first summary reveals that final grades tend to increas as the fathers level of education increases.
+
+The mean final grade (G3) for each level of Medu:
+
+* 0 (no education): average final grade is 11
+
+* 1 (primary education up to 4th grade): average final grade is 11.1
+
+* 2 (primary education 5th to 9th grade): average final grade is 11.7
+
+* 3 (secondary education 10th to 12th): average final grade is 12
+
+* 4 (higher education): average final grade is 13.2
+
+The second summary reveals that final grades also tend to increase as the mothers level of education increases but it is not as high as the average final grades when the father is educated.
+
+There does seem to be a pattern so next I wanted to determine whether students with more educated parents perform better or if one parent in particular that is educated has a greater effect than the other.
+
+```{r}
+ggplot(student_G123, 
+       mapping = aes(
+         x = Fedu, 
+         y = Grade,
+         color = famsup
+         )
+       ) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  facet_wrap(~ Term) + 
+  labs(title = "Father's Education vs. Final Grades",
+       x = "Father's Education Level",
+       y = "Final Grades")
+
+ggplot(student_G123, 
+       mapping = aes(
+         x = Medu, 
+         y = Grade,
+         color = famsup
+         )
+       ) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  facet_wrap(~ Term) + 
+  labs(title = "Mother's Education vs. Final Grades",
+       x = "Mother's Education Level",
+       y = "Final Grades")
+```
+
+The scatter plots help visualize the relationships between each parents educational level and the students academic success. There is a positive relationship between each variable. As the parents educational level increases, for both the mother and father, the student does achieve higher grades. Though it is hard to notice the line for the fathers education is slightly higher in comparison to the mothers education line. So at every level for fathers education the average final grades are higher than it is for mothers at the same levels of education. The fathers education correlates to the students grades and has a greater impact on their grades than the mother being educated.  
+
+Another variable that I wanted to take a look at was `study time`. It would make sense that the more a student studies the higher the grades. 
+
+```{r}
+ggplot(data = student_G123,
+       mapping = aes(
+         x = studytime,
+         y = Grade,
+         fill = Pstatus
+         )
+       ) +
+geom_boxplot() +
+  facet_wrap(~ Term) +  
+  labs(title = "Grade Distribution by Study Times Across Terms",
+       x = "Study Time",
+       y = "Grade")
+```
+
+```{r}
+student_G123 |>
+  group_by(Pstatus, Term) |>
+  summarise(
+    num_total = n(),
+    min = min(Grade, na.rm = TRUE),
+    median = median(Grade, na.rm = TRUE),
+    max = max(Grade, na.rm = TRUE),
+    mean = mean(Grade, na.rm = TRUE),
+    sd = sd(Grade, na.rm = TRUE)
+  )
+```
+
+It is somewhat evident that study time does effect the students grades  
+
+```{r}
+student_train |>
+  group_by(guardian) |>
+  summarise(mean_G3 = mean(G3, na.rm = TRUE),
+            count = n())
+
+ggplot(student, aes(x = guardian, fill = guardian)) +
+  geom_bar() +
+  labs(title = "Primary Caregiver Distribution",
+       x = "Guardian", y = "Count") 
+```
+
+This shows how many students report their main guardian as mother then father then other which can also be used to investigate if different guardianship types affect grades or behavior, absences, and even health. The mean for those who report their father as their guardian have the highest average grades
+
+```{r}
+library(ggplot2)
+
+ggplot(student, aes(x = G1)) +
+  geom_histogram(binwidth = 1, fill = "pink", color = "black") +
+  labs(title = "Distribution of G1 (First Trimester Grades)", x = "G1", y = "Count") 
+
+ggplot(student, aes(x = G2)) +
+  geom_histogram(binwidth = 1, fill = "lavender", color = "black") +
+  labs(title = "Distribution of G2 (Second Trimester Grades)", x = "G2", y = "Count") 
+
+ggplot(student, aes(x = G3)) +
+  geom_histogram(binwidth = 1, fill = "lightblue", color = "black") +
+  labs(title = "Distribution of G3 (Final Grades)", x = "G3", y = "Count") 
+```
+
+As expected the distributions for G1 G2 G3 are nearly identical and both G1 and G2 are good predictors for G3.
+
+```{r}
+cor(student[, c("G1", "G2", "G3")])
+```
+
+Again, as expected there are very high positive correlations between G1 G2 and G3.
+
+This analysis confirms that a linear model using G1 and G2 to predict G3 is appropriate.
 
 ## Modeling
+
+For this section I think that using PCA and clustering are good choices for this data, especially since my goal is exploration and inference rather than strict prediction. 
+
+$\textbf{Why PCA and Clustering?}$
+
+There are a lot of variables and we want to get the most out of our data without it being overly complicated and PCA will help with that. Clustering groups similar data points into clusters, revealing patterns and structures within the data.
+
+PCA and clustering are both unsupervised learning techniques that help uncover hidden structure in the data.
+
+PCA reduces dimensions by identifying the directions (principal components) that explain the most variance in the data. It helps reveal underlying patterns while simplifying the feature space.
+
+Clustering groups similar observations together based on selected features. It helps explore whether certain student profiles naturally emerge and whether those profiles relate to academic performance or support structures.
+
+Before we fit the models, we must:
+
+Remove non-numeric variables and or convert categorical variables into numeric. Then we scale/standardize the numeric variables so that they contribute equally to distance calculations.
+
+```{r}
+# Create a recipe for preprocessing
+student_pca_recipe <- recipe(G3 ~ ., data = student_train) |>
+  # Remove response variable (G3) for later comparison
+  step_dummy(all_nominal_predictors()) |>
+  step_center(all_numeric_predictors()) |>
+  step_scale(all_numeric_predictors())
+```
+
+$\textbf{Why this matters for PCA}$
+
+PCA is very sensitive to scale. Variables with higher variances will dominate the principal components unless the data is standardized. This recipe ensures:
+
+* All predictors are numeric
+
+* All numeric variables are on the same scale
+
+* The response variable G3 is excluded from the PCA transformation
+
+Here we fit and visualize the principal components.
+
+```{r}
+#This step learns everything needed to transform the training data.
+student_pca_prep <- student_pca_recipe |>
+  prep() #prepares the recipe by estimating means and standard deviations 
+
+student_pca_baked <- bake(student_pca_prep, new_data = NULL) |> select(-G3)
+#bake() applies the recipe (centered, scaled, dummified) to the training data.
+
+#new_data = NULL means it’s applying the recipe to the original training set used in prep().
+```
+
+```{r}
+# Apply PCA
+student_pca_model <- prcomp(student_pca_baked, center = TRUE, scale. = TRUE)
+#Runs Principal Component Analysis on preprocessed dataset using prcomp().
+
+#center = TRUE and scale. = TRUE are redundant here but it doesn’t hurt.
+
+student_pca_model
+```
+
+```{r}
+student_pca_pve <- student_pca_model |>
+  tidy(matrix = "pcs")
+
+ggplot(student_pca_pve,
+       aes(x = PC, 
+           y = percent)) +
+  geom_point() +
+  geom_line() +
+  labs(x = "Number of PCs",
+y = "Proportion of Variance Explained")
+```
+
+```{r}
+ggplot(student_pca_pve,
+       aes(x = PC, 
+           y = cumulative)) +
+  geom_point() +
+  geom_line() +
+  geom_hline(yintercept = 0.8, color = "red") +
+  labs(x = "Number of PCs",
+y = "Cumulative Proportion of Variance Explained")
+
+explained_var <- summary(student_pca_model)$importance[3, ]
+
+which(explained_var >= 0.80)[1]
+summary(student_pca_model)$importance
+```
+
+The scree plot shows how much variance is explained by each principal component. The summary shows us standard deviation, proportion of variance, and cumulative proportion of each component which can also help with determining how many components to keep. 
+
+Looking at the scree plots and the summary combined, we would reduce dimensionality while also preserving as much meaningful information as possible by keeping 7 components to explain about at least 80% of the variance. Which is good and bad. Good because we significantly reduced the number of dimensions, from 12 variables to just 7 while still capturing a lot of variance, bad because this many components is difficult to interpret. 
+
+While the first 7 principal components explain about 87% of the variance in the dataset, I chose to proceed with just the first 2 principal components. This decision is motivated by the goal of exploratory analysis and visualization. Using 2 components allows for interpretable, two-dimensional plots, such as biplots and cluster visualizations, that reveal broad patterns and relationships between variables and student groups.
+
+Although only a smaller portion of the total variance is retained, about 39%, these first two components still capture the most dominant axes of variation in the data. They are particularly useful for uncovering meaningful group structure (based on academic performance or support) and identifying how key variables relate to one another in reduced space. 
+
+The trade-off is that this level of reduction sacrifices some detail but it significantly enhances interpretability and visual insight, which is appropriate given the objectives of this part of the analysis.
+
+To visualize the relationship between these variables and observations in a 2D biplot we obtain the following:
+
+```{r}
+set.seed(123)
+biplot(student_pca_model,
+       scale = 0,
+       cex = 0.9,            # Shrinks text size for better readability
+       main = "Biplot of Student PCA")
+```
+
+We can make this slightly more interpretable by thinning the amount of observations we allow in the biplot.
+
+```{r}
+rownames(student_pca_model$x) <- rownames(student_pca_baked)
+random_rows <- sample(nrow(student_pca_model$x), 100)
+
+biplot(
+  x = student_pca_model$x[random_rows,],
+  y = student_pca_model$rotation
+)
+```
+
+Personally I think it would take an extra step to really see what each component represents. 
+
+```{r}
+loadings <- as.data.frame(student_pca_model$rotation[, 1:2])
+loadings$var <- rownames(loadings)
+
+ggplot(loadings, aes(x = PC1, y = PC2, label = var)) +
+  geom_segment(aes(x = 0, y = 0, xend = PC1, yend = PC2), 
+               arrow = arrow(length = unit(0.2, "cm")), color = "blue") +
+  geom_text(vjust = 1.2, size = 1.95) +
+  xlim(-1, 1) + ylim(-1, 1) +
+  labs(title = "Variable Loadings on PC1 and PC2") 
+```
+
+First off, there are only two components: PC1 (horizontal axis) and PC2 (vertical axis). Second, the numbers (-1.0 to 1.0) represent standardized scores, recall thatnthey are scaled, so each axis is measured in standard deviation units. Third, each arrow on the plot represents a variable (feature) from the dataset and are positioned in this new 2D space based on how much it contributes to or aligns with these components. The direction shows how strongly that variable is aligned with each principal component. Arrows pointing to the right contribute more to PC1. Similaryly, arrows pointing up contribute more to PC2. Their lengths represent their importance. The longer the arrow, the more important that variable is in shaping the component. Shorter arrows mean the variable has less influence on PC1 and PC2. With this knowlege we can no interpret the biplot.
+
+Based on the biplot, PC1 appears to represent academic performance and parental education. Variables like Fedu, Medu, G1, and G2 load strongly to the right, suggesting that students with more educated parents tend to earn better grades. 
+
+* Higher PC1 $\rightarrow$ stronger academic performance and more educated parents
+
+* Lower PC1 $\rightarrow$ weaker grades, possibly less academic support at home
+
+PC2 seems to capture student student independence, instability, or reduced traditional support. Variables like guardian_other, Pstatus_T, and studytime_X3, load strongly pointing downward, suggesting that students these students might correspond to more non-traditional guardianship (like not living with both parents).
+
+* Higher PC2 $\rightarrow$ possibly more instability or nontraditional support
+
+* Lower PC2 $\rightarrow$ more consistent support structures, potentially more engaged guardians
+
+Together, these components suggest that students' final grades (G3) are shaped not only by family educational background but also by their home environment and education support. 
+
+$\text{PC1} = 0.2611\times(Fedu) + 0.2861\times(Medu) + 0.5105\times(G1) + 0.5261\times(G2) + 0.5180(G3) - 0.0290\times(Pstatus = T) + 0.0052\times(guardian = mother) - 0.0968\times(guardian = other) + 0.0196\times(studytime = X2) + 0.1394\times(studytime = X3) + 0.0795\times(studytime = X4) + 0.0890\times(famsup = yes)$
+
+$\text{PC2} = 0.4408\times(Fedu) + 0.4550\times(Medu) - 0.1584\times(G1) - 0.1785\times(G2) + 0.5180(G3) - 0.0290\times(Pstatus = T) + 0.0052\times(guardian = mother) - 0.0968\times(guardian = other) + 0.0196\times(studytime = X2) + 0.1394\times(studytime = X3) + 0.0795\times(studytime = X4) + 0.0890\times(famsup = yes)$
+This equation shows how PC1 and are computed as a linear combinations of the original variables, each weighted by a coefficient (loading).
+
+The larger the absolute value of a coefficient, the more that variable contributes to PC1.
+
+The sign (positive/negative) tells you the direction of that influence.
+
+4. Clustering: Apply K-means and Evaluate
+```{r}
+
+```
+
+5. Model Evaluation & Metrics
+For Clustering:
+Use total within-cluster sum of squares and silhouette score.
+
+```{r}
+
+```
+Why These Metrics?
+Within-cluster sum of squares (WCSS): Measures compactness — lower is better.
+
+Silhouette score: Measures how well-separated the clusters are. Closer to 1 = good separation.
+
+Summary (Narrative You Can Use)
+I used PCA to reduce dimensionality and identify the most important features underlying student characteristics. After standardizing and transforming the data, I retained the first few principal components that explained the majority of the variance.
+
+I then applied k-means clustering to the PCA-transformed data to identify natural groupings of students. I chose k = 3 to balance interpretability and compactness. Model performance was evaluated using total within-cluster sum of squares and silhouette scores, which suggested that the clusters were moderately well-defined. Further analysis showed how these clusters related to variables like study time, support, and academic performance.
 
 ## Insights
 
