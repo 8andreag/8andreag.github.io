@@ -20,7 +20,7 @@ This issue is not just something I observed in others but it also something I ca
 
 The goal of this project is to investigate the key factors that influence student academic performance. Specifically, I am interested in exploring how a student’s demographics, parental education, study habits, and family support and environment contribute to their success or struggles in school. What separates a high-performing student from one who is underperforming? By analyzing these variables, I aim to identify meaningful patterns and relationships that can inform how we better support students in diverse educational settings.
 
-In short: *What are the key determinants of student performance in school?*
+$\textbf{In short:}$ *What are the key determinants of student performance in school?*
 
 ## Packages Used In This Analysis
 
@@ -104,7 +104,9 @@ $\textbf{The data includes:}$
 
 * $\textbf{traveltime:}$ home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
 
-* $\textbf{studytime:}$ weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) failures: number of past class failures (numeric: n if 1<=n<3, else 4)
+* $\textbf{studytime:}$ weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) 
+
+* $\textbf{failures:}$ number of past class failures (numeric: n if 1<=n<3, else 4)
 
 * $\textbf{schoolsup:}$ extra educational support (binary: yes or no)
 
@@ -164,15 +166,15 @@ $\textbf{We will be working with just a few varaibles:}$
 
 * $\textbf{guardian:}$ student's guardian (nominal: 'mother', 'father' or 'other')
 
-* $\textbf{studytime:}$ weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) failures: number of past class failures (numeric: n if 1<=n<3, else 4)
+* $\textbf{studytime:}$ weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) 
 
 * $\textbf{famsup:}$ family educational support (binary: yes or no)
-
-$\textbf{The main response variables will be:}$
 
 * $\textbf{G1:}$ first period grade (numeric: from 0 to 20)
 
 * $\textbf{G2:}$ second period grade (numeric: from 0 to 20)
+
+$\textbf{The main response variable will be:}$
 
 * $\textbf{G3:}$ final grade (numeric: from 0 to 20, output target)
 
@@ -426,15 +428,13 @@ ggplot(student, aes(x = G3)) +
   labs(title = "Distribution of G3 (Final Grades)", x = "G3", y = "Count") 
 ```
 
-As expected the distributions for G1 G2 G3 are nearly identical and both G1 and G2 are good predictors for G3.
+As expected the distributions for G1, G2, G3 are nearly identical and both G1 and G2 are good predictors for G3.
 
 ```{r}
 cor(student[, c("G1", "G2", "G3")])
 ```
 
-Again, as expected there are very high positive correlations between G1 G2 and G3.
-
-This analysis confirms that a linear model using G1 and G2 to predict G3 is appropriate.
+Again, as expected there are very high positive correlations between G1, G2, and G3. This analysis confirms that a linear model using G1 and G2 to predict G3 is appropriate.
 
 ## Modeling
 
@@ -442,13 +442,9 @@ For this section I think that using PCA and clustering are good choices for this
 
 $\textbf{Why PCA and Clustering?}$
 
-There are a lot of variables and we want to get the most out of our data without it being overly complicated and PCA will help with that. Clustering groups similar data points into clusters, revealing patterns and structures within the data.
+PCA and clustering are both unsupervised learning techniques that help uncover hidden structure in the data. There are a lot of variables and we want to get the most out of our data without it being overly complicated, PCA reduces dimensions by identifying principal components that explain the most variance in the data. It helps reveal underlying patterns while simplifying the feature space. I also want to know what patterns exist within the data, clustering groups similar observations together based on selected features. It helps explore whether certain student profiles naturally emerge and whether those profiles relate to academic performance or support structures.
 
-PCA and clustering are both unsupervised learning techniques that help uncover hidden structure in the data.
-
-PCA reduces dimensions by identifying the directions (principal components) that explain the most variance in the data. It helps reveal underlying patterns while simplifying the feature space.
-
-Clustering groups similar observations together based on selected features. It helps explore whether certain student profiles naturally emerge and whether those profiles relate to academic performance or support structures.
+$\textbf{Principal Component Analysis}$
 
 Before we fit the models, we must:
 
@@ -457,7 +453,6 @@ Remove non-numeric variables and or convert categorical variables into numeric. 
 ```{r}
 # Create a recipe for preprocessing
 student_pca_recipe <- recipe(G3 ~ ., data = student_train) |>
-  # Remove response variable (G3) for later comparison
   step_dummy(all_nominal_predictors()) |>
   step_center(all_numeric_predictors()) |>
   step_scale(all_numeric_predictors())
@@ -480,8 +475,8 @@ Here we fit and visualize the principal components.
 student_pca_prep <- student_pca_recipe |>
   prep() #prepares the recipe by estimating means and standard deviations 
 
-student_pca_baked <- bake(student_pca_prep, new_data = NULL) |> select(-G3)
-#bake() applies the recipe (centered, scaled, dummified) to the training data.
+student_pca_baked <- bake(student_pca_prep, new_data = NULL) |> #bake() applies the recipe (centered, scaled, dummified) to the training data.
+  select(-G3)
 
 #new_data = NULL means it’s applying the recipe to the original training set used in prep().
 ```
@@ -489,7 +484,7 @@ student_pca_baked <- bake(student_pca_prep, new_data = NULL) |> select(-G3)
 ```{r}
 # Apply PCA
 student_pca_model <- prcomp(student_pca_baked, center = TRUE, scale. = TRUE)
-#Runs Principal Component Analysis on preprocessed dataset using prcomp().
+#Runs PCA on preprocessed dataset using prcomp().
 
 #center = TRUE and scale. = TRUE are redundant here but it doesn’t hurt.
 
@@ -531,9 +526,7 @@ Looking at the scree plots and the summary combined, we would reduce dimensional
 
 While the first 7 principal components explain about 87% of the variance in the dataset, I chose to proceed with just the first 2 principal components. This decision is motivated by the goal of exploratory analysis and visualization. Using 2 components allows for interpretable, two-dimensional plots, such as biplots and cluster visualizations, that reveal broad patterns and relationships between variables and student groups.
 
-Although only a smaller portion of the total variance is retained, about 39%, these first two components still capture the most dominant axes of variation in the data. They are particularly useful for uncovering meaningful group structure (based on academic performance or support) and identifying how key variables relate to one another in reduced space. 
-
-The trade-off is that this level of reduction sacrifices some detail but it significantly enhances interpretability and visual insight, which is appropriate given the objectives of this part of the analysis.
+Although only a smaller portion of the total variance is retained, about 39%, these first two components still capture the most dominant axes of variation in the data. They are particularly useful for uncovering meaningful group structure and identifying how key variables relate to one another in reduced space. The trade-off is that this level of reduction sacrifices some detail but it significantly enhances interpretability and visual insight, which is appropriate given the objectives of this part of the analysis.
 
 To visualize the relationship between these variables and observations in a 2D biplot we obtain the following:
 
@@ -541,7 +534,7 @@ To visualize the relationship between these variables and observations in a 2D b
 set.seed(123)
 biplot(student_pca_model,
        scale = 0,
-       cex = 0.9,            # Shrinks text size for better readability
+       cex = 0.9, # Shrinks text size
        main = "Biplot of Student PCA")
 ```
 
@@ -549,7 +542,7 @@ We can make this slightly more interpretable by thinning the amount of observati
 
 ```{r}
 rownames(student_pca_model$x) <- rownames(student_pca_baked)
-random_rows <- sample(nrow(student_pca_model$x), 100)
+random_rows <- sample(nrow(student_pca_model$x), 100) #100 obervations
 
 biplot(
   x = student_pca_model$x[random_rows,],
@@ -571,7 +564,7 @@ ggplot(loadings, aes(x = PC1, y = PC2, label = var)) +
   labs(title = "Variable Loadings on PC1 and PC2") 
 ```
 
-First off, there are only two components: PC1 (horizontal axis) and PC2 (vertical axis). Second, the numbers (-1.0 to 1.0) represent standardized scores, recall thatnthey are scaled, so each axis is measured in standard deviation units. Third, each arrow on the plot represents a variable (feature) from the dataset and are positioned in this new 2D space based on how much it contributes to or aligns with these components. The direction shows how strongly that variable is aligned with each principal component. Arrows pointing to the right contribute more to PC1. Similaryly, arrows pointing up contribute more to PC2. Their lengths represent their importance. The longer the arrow, the more important that variable is in shaping the component. Shorter arrows mean the variable has less influence on PC1 and PC2. With this knowlege we can no interpret the biplot.
+First off, there are only two components: PC1 (horizontal axis) and PC2 (vertical axis). Second, the numbers (-1.0 to 1.0) represent standardized scores, recall that they are scaled, so each axis is measured in standard deviation units. Third, each arrow on the plot represents a variable (feature) from the dataset and are positioned in this new 2D space based on how much it contributes to or aligns with these components. The direction shows how strongly that variable is aligned with each principal component. Arrows pointing to the right contribute more to PC1. Similaryly, arrows pointing up contribute more to PC2. Their lengths represent their importance. The longer the arrow, the more important that variable is in shaping the component. Shorter arrows mean the variable has less influence on PC1 and PC2. With this knowlege we can no interpret the biplot.
 
 Based on the biplot, PC1 appears to represent academic performance and parental education. Variables like Fedu, Medu, G1, and G2 load strongly to the right, suggesting that students with more educated parents tend to earn better grades. 
 
@@ -587,23 +580,15 @@ PC2 seems to capture student student independence, instability, or reduced tradi
 
 Together, these components suggest that students' final grades (G3) are shaped not only by family educational background but also by their home environment and education support. 
 
-$\text{PC1} = 0.2611\times(Fedu) + 0.2861\times(Medu) + 0.5105\times(G1) + 0.5261\times(G2) + 0.5180(G3) - 0.0290\times(Pstatus = T) + 0.0052\times(guardian = mother) - 0.0968\times(guardian = other) + 0.0196\times(studytime = X2) + 0.1394\times(studytime = X3) + 0.0795\times(studytime = X4) + 0.0890\times(famsup = yes)$
+$$\text{PC1} = 0.4094\times(Fedu) + 0.4372\times(Medu) + 0.5262\times(G1) + 0.5271\times(G2) - 0.052\times(Pstatus = T) + 0.0427\times(guardian = mother) - 0.1491\times(guardian = other) + 0.0013\times(studytime = X2) + 0.1817\times(studytime = X3) + 0.0870\times(studytime = X4) + 0.1384\times(famsup = yes)$$
 
-$\text{PC2} = 0.4408\times(Fedu) + 0.4550\times(Medu) - 0.1584\times(G1) - 0.1785\times(G2) + 0.5180(G3) - 0.0290\times(Pstatus = T) + 0.0052\times(guardian = mother) - 0.0968\times(guardian = other) + 0.0196\times(studytime = X2) + 0.1394\times(studytime = X3) + 0.0795\times(studytime = X4) + 0.0890\times(famsup = yes)$
-This equation shows how PC1 and are computed as a linear combinations of the original variables, each weighted by a coefficient (loading).
+$\text{PC2} = - 0.1995\times(Fedu) - 0.2228\times(Medu) + 0.1501\times(G1) + 0.1686\times(G2) + 0.2605\times(Pstatus = T) - 0.3441\times(guardian = mother) + 0.3256\times(guardian = other) - 0.5552\times(studytime = X2) + 0.4240\times(studytime = X3) + 0.2687\times(studytime = X4) - 0.0839\times(famsup = yes)$
 
-The larger the absolute value of a coefficient, the more that variable contributes to PC1.
+This equation shows how PC1 and PC2 are computed as a linear combinations of the original variables, each weighted by a coefficient (loading).
 
-The sign (positive/negative) tells you the direction of that influence.
+The larger the absolute value of a coefficient, the more that variable contributes to eac principal component.The sign (positive/negative) tells you the direction of that influence.
 
-4. Clustering: Apply K-means and Evaluate
-```{r}
-
-```
-
-5. Model Evaluation & Metrics
-For Clustering:
-Use total within-cluster sum of squares and silhouette score.
+$\textbf{Clustering}$ 
 
 ```{r}
 

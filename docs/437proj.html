@@ -231,7 +231,7 @@ window.Quarto = {
 <section id="main-objective" class="level2">
 <h2 class="anchored" data-anchor-id="main-objective">Main Objective</h2>
 <p>The goal of this project is to investigate the key factors that influence student academic performance. Specifically, I am interested in exploring how a student’s demographics, parental education, study habits, and family support and environment contribute to their success or struggles in school. What separates a high-performing student from one who is underperforming? By analyzing these variables, I aim to identify meaningful patterns and relationships that can inform how we better support students in diverse educational settings.</p>
-<p>In short: <em>What are the key determinants of student performance in school?</em></p>
+<p><span class="math inline">\(\textbf{In short:}\)</span> <em>What are the key determinants of student performance in school?</em></p>
 </section>
 <section id="packages-used-in-this-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="packages-used-in-this-analysis">Packages Used In This Analysis</h2>
@@ -351,7 +351,8 @@ window.Quarto = {
 <li><p><span class="math inline">\(\textbf{reason:}\)</span> reason to choose this school (nominal: close to ‘home’, school ‘reputation’, ‘course’ preference or ‘other’)</p></li>
 <li><p><span class="math inline">\(\textbf{guardian:}\)</span> student’s guardian (nominal: ‘mother’, ‘father’ or ‘other’)</p></li>
 <li><p><span class="math inline">\(\textbf{traveltime:}\)</span> home to school travel time (numeric: 1 - &lt;15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - &gt;1 hour)</p></li>
-<li><p><span class="math inline">\(\textbf{studytime:}\)</span> weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours) failures: number of past class failures (numeric: n if 1&lt;=n&lt;3, else 4)</p></li>
+<li><p><span class="math inline">\(\textbf{studytime:}\)</span> weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours)</p></li>
+<li><p><span class="math inline">\(\textbf{failures:}\)</span> number of past class failures (numeric: n if 1&lt;=n&lt;3, else 4)</p></li>
 <li><p><span class="math inline">\(\textbf{schoolsup:}\)</span> extra educational support (binary: yes or no)</p></li>
 <li><p><span class="math inline">\(\textbf{famsup:}\)</span> family educational support (binary: yes or no)</p></li>
 <li><p><span class="math inline">\(\textbf{paid:}\)</span> extra paid classes within the course subject (Math or Portuguese) (binary: yes or no)</p></li>
@@ -387,14 +388,14 @@ window.Quarto = {
 <li><p><span class="math inline">\(\textbf{Medu:}\)</span> mother’s education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade 3-&gt; secondary education or 4-higher education)</p></li>
 <li><p><span class="math inline">\(\textbf{Fedu:}\)</span> father’s education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade, 3 - secondary education or 4- higher education)</p></li>
 <li><p><span class="math inline">\(\textbf{guardian:}\)</span> student’s guardian (nominal: ‘mother’, ‘father’ or ‘other’)</p></li>
-<li><p><span class="math inline">\(\textbf{studytime:}\)</span> weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours) failures: number of past class failures (numeric: n if 1&lt;=n&lt;3, else 4)</p></li>
+<li><p><span class="math inline">\(\textbf{studytime:}\)</span> weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours)</p></li>
 <li><p><span class="math inline">\(\textbf{famsup:}\)</span> family educational support (binary: yes or no)</p></li>
-</ul>
-<p><span class="math inline">\(\textbf{The main response variables will be:}\)</span></p>
-<ul>
 <li><p><span class="math inline">\(\textbf{G1:}\)</span> first period grade (numeric: from 0 to 20)</p></li>
 <li><p><span class="math inline">\(\textbf{G2:}\)</span> second period grade (numeric: from 0 to 20)</p></li>
-<li><p><span class="math inline">\(\textbf{G3:}\)</span> final grade (numeric: from 0 to 20, output target)</p></li>
+</ul>
+<p><span class="math inline">\(\textbf{The main response variable will be:}\)</span></p>
+<ul>
+<li><span class="math inline">\(\textbf{G3:}\)</span> final grade (numeric: from 0 to 20, output target)</li>
 </ul>
 <p>These are variables I think are important predictors for academic performance, as study time, parental education and family support can significantly impact a student’s success.</p>
 <div class="cell">
@@ -791,7 +792,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>As expected the distributions for G1 G2 G3 are nearly identical and both G1 and G2 are good predictors for G3.</p>
+<p>As expected the distributions for G1, G2, G3 are nearly identical and both G1 and G2 are good predictors for G3.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(student[, <span class="fu">c</span>(<span class="st">"G1"</span>, <span class="st">"G2"</span>, <span class="st">"G3"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -801,26 +802,22 @@ G2 0.8649816 1.0000000 0.9185480
 G3 0.8263871 0.9185480 1.0000000</code></pre>
 </div>
 </div>
-<p>Again, as expected there are very high positive correlations between G1 G2 and G3.</p>
-<p>This analysis confirms that a linear model using G1 and G2 to predict G3 is appropriate.</p>
+<p>Again, as expected there are very high positive correlations between G1, G2, and G3. This analysis confirms that a linear model using G1 and G2 to predict G3 is appropriate.</p>
 </section>
 <section id="modeling" class="level2">
 <h2 class="anchored" data-anchor-id="modeling">Modeling</h2>
 <p>For this section I think that using PCA and clustering are good choices for this data, especially since my goal is exploration and inference rather than strict prediction.</p>
 <p><span class="math inline">\(\textbf{Why PCA and Clustering?}\)</span></p>
-<p>There are a lot of variables and we want to get the most out of our data without it being overly complicated and PCA will help with that. Clustering groups similar data points into clusters, revealing patterns and structures within the data.</p>
-<p>PCA and clustering are both unsupervised learning techniques that help uncover hidden structure in the data.</p>
-<p>PCA reduces dimensions by identifying the directions (principal components) that explain the most variance in the data. It helps reveal underlying patterns while simplifying the feature space.</p>
-<p>Clustering groups similar observations together based on selected features. It helps explore whether certain student profiles naturally emerge and whether those profiles relate to academic performance or support structures.</p>
+<p>PCA and clustering are both unsupervised learning techniques that help uncover hidden structure in the data. There are a lot of variables and we want to get the most out of our data without it being overly complicated, PCA reduces dimensions by identifying principal components that explain the most variance in the data. It helps reveal underlying patterns while simplifying the feature space. I also want to know what patterns exist within the data, clustering groups similar observations together based on selected features. It helps explore whether certain student profiles naturally emerge and whether those profiles relate to academic performance or support structures.</p>
+<p><span class="math inline">\(\textbf{Principal Component Analysis}\)</span></p>
 <p>Before we fit the models, we must:</p>
 <p>Remove non-numeric variables and or convert categorical variables into numeric. Then we scale/standardize the numeric variables so that they contribute equally to distance calculations.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a recipe for preprocessing</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>student_pca_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(G3 <span class="sc">~</span> ., <span class="at">data =</span> student_train) <span class="sc">|&gt;</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove response variable (G3) for later comparison</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_center</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_scale</span>(<span class="fu">all_numeric_predictors</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_center</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_scale</span>(<span class="fu">all_numeric_predictors</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><span class="math inline">\(\textbf{Why this matters for PCA}\)</span></p>
 <p>PCA is very sensitive to scale. Variables with higher variances will dominate the principal components unless the data is standardized. This recipe ensures:</p>
@@ -835,15 +832,15 @@ G3 0.8263871 0.9185480 1.0000000</code></pre>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>student_pca_prep <span class="ot">&lt;-</span> student_pca_recipe <span class="sc">|&gt;</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>() <span class="co">#prepares the recipe by estimating means and standard deviations </span></span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>student_pca_baked <span class="ot">&lt;-</span> <span class="fu">bake</span>(student_pca_prep, <span class="at">new_data =</span> <span class="cn">NULL</span>) <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">-</span>G3)</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co">#bake() applies the recipe (centered, scaled, dummified) to the training data.</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>student_pca_baked <span class="ot">&lt;-</span> <span class="fu">bake</span>(student_pca_prep, <span class="at">new_data =</span> <span class="cn">NULL</span>) <span class="sc">|&gt;</span> <span class="co">#bake() applies the recipe (centered, scaled, dummified) to the training data.</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>G3)</span>
 <span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">#new_data = NULL means it’s applying the recipe to the original training set used in prep().</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA</span></span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>student_pca_model <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(student_pca_baked, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Runs Principal Component Analysis on preprocessed dataset using prcomp().</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Runs PCA on preprocessed dataset using prcomp().</span></span>
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#center = TRUE and scale. = TRUE are redundant here but it doesn’t hurt.</span></span>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -948,15 +945,14 @@ Cumulative Proportion  0.868930 0.9220100 0.9592400 0.9887300 1.0000000</code></
 </div>
 <p>The scree plot shows how much variance is explained by each principal component. The summary shows us standard deviation, proportion of variance, and cumulative proportion of each component which can also help with determining how many components to keep.</p>
 <p>Looking at the scree plots and the summary combined, we would reduce dimensionality while also preserving as much meaningful information as possible by keeping 7 components to explain about at least 80% of the variance. Which is good and bad. Good because we significantly reduced the number of dimensions, from 12 variables to just 7 while still capturing a lot of variance, bad because this many components is difficult to interpret.</p>
-<p>While the first 7 principal components explain about 86% of the variance in the dataset, I chose to proceed with just the first 2 principal components. This decision is motivated by the goal of exploratory analysis and visualization. Using 2 components allows for interpretable, two-dimensional plots, such as biplots and cluster visualizations, that reveal broad patterns and relationships between variables and student groups.</p>
-<p>Although only a smaller portion of the total variance is retained, about 39%, these first two components still capture the most dominant axes of variation in the data. They are particularly useful for uncovering meaningful group structure (based on academic performance or support) and identifying how key variables relate to one another in reduced space.</p>
-<p>The trade-off is that this level of reduction sacrifices some detail but it significantly enhances interpretability and visual insight, which is appropriate given the objectives of this part of the analysis.</p>
+<p>While the first 7 principal components explain about 87% of the variance in the dataset, I chose to proceed with just the first 2 principal components. This decision is motivated by the goal of exploratory analysis and visualization. Using 2 components allows for interpretable, two-dimensional plots, such as biplots and cluster visualizations, that reveal broad patterns and relationships between variables and student groups.</p>
+<p>Although only a smaller portion of the total variance is retained, about 39%, these first two components still capture the most dominant axes of variation in the data. They are particularly useful for uncovering meaningful group structure and identifying how key variables relate to one another in reduced space. The trade-off is that this level of reduction sacrifices some detail but it significantly enhances interpretability and visual insight, which is appropriate given the objectives of this part of the analysis.</p>
 <p>To visualize the relationship between these variables and observations in a 2D biplot we obtain the following:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(student_pca_model,</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">scale =</span> <span class="dv">0</span>,</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.9</span>,            <span class="co"># Shrinks text size for better readability</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.9</span>, <span class="co"># Shrinks text size</span></span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Biplot of Student PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -969,7 +965,7 @@ Cumulative Proportion  0.868930 0.9220100 0.9592400 0.9887300 1.0000000</code></
 <p>We can make this slightly more interpretable by thinning the amount of observations we allow in the biplot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(student_pca_model<span class="sc">$</span>x) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(student_pca_baked)</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>random_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(student_pca_model<span class="sc">$</span>x), <span class="dv">100</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>random_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(student_pca_model<span class="sc">$</span>x), <span class="dv">100</span>) <span class="co">#100 obervations</span></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(</span>
 <span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> student_pca_model<span class="sc">$</span>x[random_rows,],</span>
@@ -991,7 +987,7 @@ Cumulative Proportion  0.868930 0.9220100 0.9592400 0.9887300 1.0000000</code></
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(loadings, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">label =</span> var)) <span class="sc">+</span></span>
 <span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> PC1, <span class="at">yend =</span> PC2), </span>
 <span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="fl">1.2</span>, <span class="at">size =</span> <span class="fl">1.75</span>) <span class="sc">+</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="fl">1.2</span>, <span class="at">size =</span> <span class="fl">1.95</span>) <span class="sc">+</span></span>
 <span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Variable Loadings on PC1 and PC2"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1002,7 +998,7 @@ Cumulative Proportion  0.868930 0.9220100 0.9592400 0.9887300 1.0000000</code></
 </div>
 </div>
 </div>
-<p>First off, there are only two components: PC1 (horizontal axis) and PC2 (vertical axis). Second, the numbers (-1.0 to 1.0) represent standardized scores, recall thatnthey are scaled, so each axis is measured in standard deviation units. Third, each arrow on the plot represents a variable (feature) from the dataset and are positioned in this new 2D space based on how much it contributes to or aligns with these components. The direction shows how strongly that variable is aligned with each principal component. Arrows pointing to the right contribute more to PC1. Similaryly, arrows pointing up contribute more to PC2. Their lengths represent their importance. The longer the arrow, the more important that variable is in shaping the component. Shorter arrows mean the variable has less influence on PC1 and PC2. With this knowlege we can no interpret the biplot.</p>
+<p>First off, there are only two components: PC1 (horizontal axis) and PC2 (vertical axis). Second, the numbers (-1.0 to 1.0) represent standardized scores, recall that they are scaled, so each axis is measured in standard deviation units. Third, each arrow on the plot represents a variable (feature) from the dataset and are positioned in this new 2D space based on how much it contributes to or aligns with these components. The direction shows how strongly that variable is aligned with each principal component. Arrows pointing to the right contribute more to PC1. Similaryly, arrows pointing up contribute more to PC2. Their lengths represent their importance. The longer the arrow, the more important that variable is in shaping the component. Shorter arrows mean the variable has less influence on PC1 and PC2. With this knowlege we can no interpret the biplot.</p>
 <p>Based on the biplot, PC1 appears to represent academic performance and parental education. Variables like Fedu, Medu, G1, and G2 load strongly to the right, suggesting that students with more educated parents tend to earn better grades.</p>
 <ul>
 <li><p>Higher PC1 <span class="math inline">\(\rightarrow\)</span> stronger academic performance and more educated parents</p></li>
@@ -1014,16 +1010,11 @@ Cumulative Proportion  0.868930 0.9220100 0.9592400 0.9887300 1.0000000</code></
 <li><p>Lower PC2 <span class="math inline">\(\rightarrow\)</span> more consistent support structures, potentially more engaged guardians</p></li>
 </ul>
 <p>Together, these components suggest that students’ final grades (G3) are shaped not only by family educational background but also by their home environment and education support.</p>
-<p><span class="math inline">\(\text{PC1} = 0.2611\times(Fedu) + 0.2861\times(Medu) + 0.5105\times(G1) + 0.5261\times(G2) + 0.5180(G3) - 0.0290\times(Pstatus = T) + 0.0052\times(guardian = mother) - 0.0968\times(guardian = other) + 0.0196\times(studytime = X2) + 0.1394\times(studytime = X3) + 0.0795\times(studytime = X4) + 0.0890\times(famsup = yes)\)</span></p>
-<p><span class="math inline">\(\text{PC2} = 0.4408\times(Fedu) + 0.4550\times(Medu) - 0.1584\times(G1) - 0.1785\times(G2) + 0.5180(G3) - 0.0290\times(Pstatus = T) + 0.0052\times(guardian = mother) - 0.0968\times(guardian = other) + 0.0196\times(studytime = X2) + 0.1394\times(studytime = X3) + 0.0795\times(studytime = X4) + 0.0890\times(famsup = yes)\)</span> This equation shows how PC1 and are computed as a linear combinations of the original variables, each weighted by a coefficient (loading).</p>
-<p>The larger the absolute value of a coefficient, the more that variable contributes to PC1.</p>
-<p>The sign (positive/negative) tells you the direction of that influence.</p>
-<ol start="4" type="1">
-<li>Clustering: Apply K-means and Evaluate</li>
-</ol>
-<ol start="5" type="1">
-<li>Model Evaluation &amp; Metrics For Clustering: Use total within-cluster sum of squares and silhouette score.</li>
-</ol>
+<p><span class="math display">\[\text{PC1} = 0.4094\times(Fedu) + 0.4372\times(Medu) + 0.5262\times(G1) + 0.5271\times(G2) - 0.052\times(Pstatus = T) + 0.0427\times(guardian = mother) - 0.1491\times(guardian = other) + 0.0013\times(studytime = X2) + 0.1817\times(studytime = X3) + 0.0870\times(studytime = X4) + 0.1384\times(famsup = yes)\]</span></p>
+<p><span class="math inline">\(\text{PC2} = - 0.1995\times(Fedu) - 0.2228\times(Medu) + 0.1501\times(G1) + 0.1686\times(G2) + 0.2605\times(Pstatus = T) - 0.3441\times(guardian = mother) + 0.3256\times(guardian = other) - 0.5552\times(studytime = X2) + 0.4240\times(studytime = X3) + 0.2687\times(studytime = X4) - 0.0839\times(famsup = yes)\)</span></p>
+<p>This equation shows how PC1 and PC2 are computed as a linear combinations of the original variables, each weighted by a coefficient (loading).</p>
+<p>The larger the absolute value of a coefficient, the more that variable contributes to eac principal component.The sign (positive/negative) tells you the direction of that influence.</p>
+<p><span class="math inline">\(\textbf{Clustering}\)</span></p>
 <p>Why These Metrics? Within-cluster sum of squares (WCSS): Measures compactness — lower is better.</p>
 <p>Silhouette score: Measures how well-separated the clusters are. Closer to 1 = good separation.</p>
 <p>Summary (Narrative You Can Use) I used PCA to reduce dimensionality and identify the most important features underlying student characteristics. After standardizing and transforming the data, I retained the first few principal components that explained the majority of the variance.</p>
