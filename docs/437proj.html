@@ -1015,10 +1015,6 @@ Cumulative Proportion  0.868930 0.9220100 0.9592400 0.9887300 1.0000000</code></
 <p>This equation shows how PC1 and PC2 are computed as a linear combinations of the original variables, each weighted by a coefficient (loading).</p>
 <p>The larger the absolute value of a coefficient, the more that variable contributes to eac principal component.The sign (positive/negative) tells you the direction of that influence.</p>
 <p><span class="math inline">\(\textbf{Clustering}\)</span></p>
-<p>Why These Metrics? Within-cluster sum of squares (WCSS): Measures compactness — lower is better.</p>
-<p>Silhouette score: Measures how well-separated the clusters are. Closer to 1 = good separation.</p>
-<p>Summary (Narrative You Can Use) I used PCA to reduce dimensionality and identify the most important features underlying student characteristics. After standardizing and transforming the data, I retained the first few principal components that explained the majority of the variance.</p>
-<p>I then applied k-means clustering to the PCA-transformed data to identify natural groupings of students. I chose k = 3 to balance interpretability and compactness. Model performance was evaluated using total within-cluster sum of squares and silhouette scores, which suggested that the clusters were moderately well-defined. Further analysis showed how these clusters related to variables like study time, support, and academic performance.</p>
 </section>
 <section id="insights" class="level2">
 <h2 class="anchored" data-anchor-id="insights">Insights</h2>
