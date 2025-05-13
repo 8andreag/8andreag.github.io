@@ -649,7 +649,7 @@ pca_scores <- as.data.frame(student_pca_model$x[, 1:2])  # PC1 and PC2
 pca_scores$G3_category <- student_multinom_data$G3_category
 ```
 
-$\textbf{Fit the Model}$
+$\textbf{Fit the Multinomial Logistic Regression Model}$
 
 ```{r}
 library(nnet)
@@ -676,13 +676,15 @@ p
 
 ```
 
+$\textbf{Make Predictions}$
+
 ```{r}
 predicted <- predict(multinom_model, type = "class")
 table(predicted, pca_scores$G3_category)
 
 ```
 
-
+$\textbf{Visualize Predicted Grade Categories}$
 ```{r}
 library(ggplot2)
 
@@ -706,10 +708,15 @@ ggplot() +
   scale_color_manual(values = c("low" = "red", "medium" = "orange", "high" = "green")) +
   labs(title = "Multinomial Logistic Regression Decision Boundaries",
        subtitle = "Predicted Grade Categories in PC1 vs. PC2 Space",
-       x = "PC1", y = "PC2", fill = "Predicted", color = "Actual") +
-  theme_minimal()
+       x = "PC1", y = "PC2", fill = "Predicted", color = "Actual")
 
 ```
+
+Background regions: What category the model would predict based on any combination of PC1 and PC2.
+
+Points: Actual students, colored by their true G3_category
+
+Areas where colors don’t match show misclassifications, helping you assess model fit visually.
 
 $\textbf{Clustering}$ 
 
