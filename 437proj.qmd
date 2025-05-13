@@ -634,7 +634,6 @@ converged confirms the model successfully found a stable solution where the log-
 The bottom line:
 The model successfully fit the data.It took 10 iterations to converge. We now interpret the model’s coefficients or use it for prediction, evaluation, or visualization.
 
-
 $\textbf{Interpret the Model}$
 
 ```{r}
@@ -645,8 +644,25 @@ summary(multinom_model)$coefficients
 z <- summary(multinom_model)$coefficients / summary(multinom_model)$standard.errors
 p <- 2 * (1 - pnorm(abs(z)))
 p
-
 ```
+
+The baseline category is likely "high".
+
+Each row gives the coefficients of the log-odds of the low and medium categories versus "high".
+
+PC1 is the strongest predictor — large negative coefficients in both comparisons, especially for "low".
+
+Individuals with higher PC1 scores are much more likely to be in the "high" category rather than "low" or "medium".
+
+PC2 also negatively influences the odds of being in lower categories, but less strongly.
+
+PC1 (Principal Component 1):
+p = 0 for both "low" and "medium": This means PC1 is highly statistically significant in differentiating both "low" and "medium" from the "high" category. 
+
+PC2 is also significant, but less so — especially for distinguishing "medium" vs. "high".
+
+$\textbf{PC1 is a strong predictor.}$
+
 
 $\textbf{Make Predictions}$
 
@@ -656,7 +672,22 @@ table(predicted, pca_scores$G3_category)
 
 ```
 
+* 65 correctly predicted as high
+
+* 45 incorrectly predicted as medium
+
+* 31 correctly predicted as low 
+
+* 39 misclassified as medium 
+
+* 20 misclassified as high 
+
+* 16 misclassified as low 
+
+* 303 correctly predicted as medium 
+
 $\textbf{Visualize Predicted Grade Categories}$
+
 ```{r}
 library(ggplot2)
 
@@ -683,6 +714,39 @@ ggplot() +
        x = "PC1", y = "PC2", fill = "Predicted", color = "Actual")
 
 ```
+
+Each color in the background represents the model's predicted class for that region in the PC1–PC2 space:
+
+* Green area: model predicts high
+
+* Orange area: model predicts medium
+
+* Red area: model predicts low
+
+These regions are based on the predicted class from the model for a grid of PC1 and PC2 values. They represent the decision boundaries — where the model switches between predicting "low", "medium", or "high".
+
+Each point represents an actual observation:
+
+Green dots: true label is high
+
+Red dots: true label is low
+
+Orange dots: true label is medium
+
+By comparing the dot color (actual) with the background color (predicted), you can see where the model is accurate or making mistakes.
+
+Most accurate region: "high"
+The green region is dominated by green dots (model does well predicting high grades). This aligns with the confusion matrix where “high” had $59\%$ accuracy.
+
+Some overlap for "medium"
+The orange area contains mostly orange dots, but also some red and green.
+
+This explains why "medium" had high accuracy $89\%$, but there were still some misclassifications from adjacent classes.
+
+Weakest predictions: "low"
+The red region includes a mix of red and orange dots, with fewer points overall.
+
+“Low” is predicted only in a small region of the PC space, and it overlaps with actual "medium" points (leads to misclassifications, which you saw in the confusion matrix $44\ $accuracy).
 
 Background regions: What category the model would predict based on any combination of PC1 and PC2.
 
