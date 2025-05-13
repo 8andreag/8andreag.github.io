@@ -458,6 +458,51 @@ student_pca_recipe <- recipe(G3 ~ ., data = student_train) |>
   step_scale(all_numeric_predictors())
 ```
 
+```{r}
+library(ggplot2)
+
+# Create a grid of PC1 and PC2 values
+grid <- expand.grid(
+  PC1 = seq(min(pca_scores$PC1), max(pca_scores$PC1), length.out = 100),
+  PC2 = seq(min(pca_scores$PC2), max(pca_scores$PC2), length.out = 100)
+)
+
+# Predict class for each point on the grid
+grid$predicted <- predict(multinom_model, newdata = grid)
+
+```
+
+```{r}
+ggplot() +
+  geom_tile(data = grid, aes(x = PC1, y = PC2, fill = predicted), alpha = 0.3) +
+  geom_point(data = pca_scores, aes(x = PC1, y = PC2, color = G3_category), size = 2) +
+  scale_fill_manual(values = c("low" = "red", "medium" = "gray", "high" = "lightgreen")) +
+  scale_color_manual(values = c("low" = "red", "medium" = "gray", "high" = "lightgreen")) +
+  labs(title = "Multinomial Logistic Regression Decision Boundaries",
+       subtitle = "Predicted Grade Categories in PC1 vs. PC2 Space",
+       x = "PC1", y = "PC2", fill = "Predicted", color = "Actual") 
+```
+$\textbf{Testing Our Test Set}$
+
+```{r}
+# test set
+student_test <- student_test |>
+  mutate(G3_category = case_when(
+    G3 < 10 ~ "low",
+    G3 >= 10 & G3 < 15 ~ "medium",
+    G3 >= 15 ~ "high"
+  ))
+```
+
+```{r}
+student_pca_recipe <- recipe(G3_category ~ ., data = student_train) |>
+  update_role(G3, new_role = "id") |>
+  step_dummy(all_nominal_predictors()) |>
+  step_center(all_numeric_predictors()) |>
+  step_scale(all_numeric_predictors())
+
+```
+
 $\textbf{Why this matters for PCA}$
 
 PCA is very sensitive to scale. Variables with higher variances will dominate the principal components unless the data is standardized. This recipe ensures:
@@ -604,6 +649,8 @@ pca_scores <- as.data.frame(student_pca_model$x[, 1:2])  # PC1 and PC2
 pca_scores$G3_category <- student_multinom_data$G3_category
 ```
 
+$\textbf{Fit the Model}$
+
 ```{r}
 library(nnet)
 
@@ -616,6 +663,7 @@ summary(multinom_model)
 
 ```
 
+$\textbf{Interpret the Model}$
 
 ```{r}
 # Coefficients
@@ -631,6 +679,35 @@ p
 ```{r}
 predicted <- predict(multinom_model, type = "class")
 table(predicted, pca_scores$G3_category)
+
+```
+
+
+```{r}
+library(ggplot2)
+
+# Create a grid of PC1 and PC2 values
+grid <- expand.grid(
+  PC1 = seq(min(pca_scores$PC1), max(pca_scores$PC1), length.out = 100),
+  PC2 = seq(min(pca_scores$PC2), max(pca_scores$PC2), length.out = 100)
+)
+
+# Predict class for each point on the grid
+grid$predicted <- predict(multinom_model, newdata = grid)
+
+```
+
+
+```{r}
+ggplot() +
+  geom_tile(data = grid, aes(x = PC1, y = PC2, fill = predicted), alpha = 0.3) +
+  geom_point(data = pca_scores, aes(x = PC1, y = PC2, color = G3_category), size = 2) +
+  scale_fill_manual(values = c("low" = "red", "medium" = "orange", "high" = "green")) +
+  scale_color_manual(values = c("low" = "red", "medium" = "orange", "high" = "green")) +
+  labs(title = "Multinomial Logistic Regression Decision Boundaries",
+       subtitle = "Predicted Grade Categories in PC1 vs. PC2 Space",
+       x = "PC1", y = "PC2", fill = "Predicted", color = "Actual") +
+  theme_minimal()
 
 ```
 

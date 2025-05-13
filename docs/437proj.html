@@ -1014,6 +1014,82 @@ Cumulative Proportion  0.868930 0.9220100 0.9592400 0.9887300 1.0000000</code></
 <p><span class="math inline">\(\text{PC2} = - 0.1995\times(Fedu) - 0.2228\times(Medu) + 0.1501\times(G1) + 0.1686\times(G2) + 0.2605\times(Pstatus = T) - 0.3441\times(guardian = mother) + 0.3256\times(guardian = other) - 0.5552\times(studytime = X2) + 0.4240\times(studytime = X3) + 0.2687\times(studytime = X4) - 0.0839\times(famsup = yes)\)</span></p>
 <p>This equation shows how PC1 and PC2 are computed as a linear combinations of the original variables, each weighted by a coefficient (loading).</p>
 <p>The larger the absolute value of a coefficient, the more that variable contributes to eac principal component.The sign (positive/negative) tells you the direction of that influence.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#categorizing</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>student_multinom_data <span class="ot">&lt;-</span> student_train <span class="sc">|&gt;</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">G3_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"low"</span>,         <span class="co"># Failing or poor performance</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span> G3 <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"medium"</span>,  <span class="co"># Average performance</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"high"</span>        <span class="co"># High-performing students</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(student_pca_model<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])  <span class="co"># PC1 and PC2</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>pca_scores<span class="sc">$</span>G3_category <span class="ot">&lt;-</span> student_multinom_data<span class="sc">$</span>G3_category</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure G3_category is a factor</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>pca_scores<span class="sc">$</span>G3_category <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(pca_scores<span class="sc">$</span>G3_category)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model using PC1 and PC2 as predictors</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>multinom_model <span class="ot">&lt;-</span> <span class="fu">multinom</span>(G3_category <span class="sc">~</span> PC1 <span class="sc">+</span> PC2, <span class="at">data =</span> pca_scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># weights:  12 (6 variable)
+initial  value 570.179778 
+iter  10 value 278.623878
+final  value 278.487428 
+converged</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(multinom_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+multinom(formula = G3_category ~ PC1 + PC2, data = pca_scores)
+
+Coefficients:
+       (Intercept)       PC1        PC2
+low      -1.084983 -3.083302 -1.0495486
+medium    2.353355 -1.496623 -0.2717676
+
+Std. Errors:
+       (Intercept)       PC1       PC2
+low      0.3971379 0.2505476 0.2059965
+medium   0.2208812 0.1531291 0.1116470
+
+Residual Deviance: 556.9749 
+AIC: 568.9749 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(multinom_model)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       (Intercept)       PC1        PC2
+low      -1.084983 -3.083302 -1.0495486
+medium    2.353355 -1.496623 -0.2717676</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-scores and p-values</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">summary</span>(multinom_model)<span class="sc">$</span>coefficients <span class="sc">/</span> <span class="fu">summary</span>(multinom_model)<span class="sc">$</span>standard.errors</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z)))</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       (Intercept) PC1          PC2
+low    0.006294987   0 3.487748e-07
+medium 0.000000000   0 1.492603e-02</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(multinom_model, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(predicted, pca_scores<span class="sc">$</span>G3_category)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         
+predicted high low medium
+   high     65   0     20
+   low       0  31     16
+   medium   45  39    303</code></pre>
+</div>
+</div>
 <p><span class="math inline">\(\textbf{Clustering}\)</span></p>
 </section>
 <section id="insights" class="level2">
