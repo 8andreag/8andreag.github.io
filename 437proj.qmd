@@ -617,8 +617,23 @@ pca_scores$G3_category <- as.factor(pca_scores$G3_category)
 # Fit the model using PC1 and PC2 as predictors
 multinom_model <- multinom(G3_category ~ PC1 + PC2, data = pca_scores)
 summary(multinom_model)
-
 ```
+
+The model is estimating 12 coefficients in total. This includes intercepts and coefficients for each category in your response variable .
+
+I used 2 predictor variables (PC1 and PC2), and had 3 outcome classes (low, medium, high), so:
+
+The model estimates $(3 - 1) \times (2 \text{predictors} + 1 \text{intercept}) = 2 × 3 = 6$ weights per outcome.
+
+$570.179778$ is the initial value of the log-likelihood function before any iterations.
+
+$278.487428$ final log-likelihood value after the last iteration
+
+converged confirms the model successfully found a stable solution where the log-likelihood couldn't improve much further.
+
+The bottom line:
+The model successfully fit the data.It took 10 iterations to converge. We now interpret the model’s coefficients or use it for prediction, evaluation, or visualization.
+
 
 $\textbf{Interpret the Model}$
 
