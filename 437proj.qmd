@@ -588,6 +588,52 @@ This equation shows how PC1 and PC2 are computed as a linear combinations of the
 
 The larger the absolute value of a coefficient, the more that variable contributes to eac principal component.The sign (positive/negative) tells you the direction of that influence.
 
+
+```{r}
+#categorizing
+student_multinom_data <- student_train |>
+  mutate(G3_category = case_when(
+    G3 < 10 ~ "low",         # Failing or poor performance
+    G3 >= 10 & G3 < 15 ~ "medium",  # Average performance
+    G3 >= 15 ~ "high"        # High-performing students
+  ))
+```
+
+```{r}
+pca_scores <- as.data.frame(student_pca_model$x[, 1:2])  # PC1 and PC2
+pca_scores$G3_category <- student_multinom_data$G3_category
+```
+
+```{r}
+library(nnet)
+
+# Make sure G3_category is a factor
+pca_scores$G3_category <- as.factor(pca_scores$G3_category)
+
+# Fit the model using PC1 and PC2 as predictors
+multinom_model <- multinom(G3_category ~ PC1 + PC2, data = pca_scores)
+summary(multinom_model)
+
+```
+
+
+```{r}
+# Coefficients
+summary(multinom_model)$coefficients
+
+# Z-scores and p-values
+z <- summary(multinom_model)$coefficients / summary(multinom_model)$standard.errors
+p <- 2 * (1 - pnorm(abs(z)))
+p
+
+```
+
+```{r}
+predicted <- predict(multinom_model, type = "class")
+table(predicted, pca_scores$G3_category)
+
+```
+
 $\textbf{Clustering}$ 
 
 
