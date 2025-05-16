@@ -4,6 +4,7 @@ editor: visual
 ---
 
 ```{r}
+#| message: false
 here::i_am("437proj.qmd")
 ```
 
