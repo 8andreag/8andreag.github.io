@@ -218,9 +218,6 @@ window.Quarto = {
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">i_am</span>(<span class="st">"437proj.qmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>here() starts at /Users/andreagarcia/437 Project</code></pre>
-</div>
 </div>
 <section id="motivation-and-context" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-and-context">Motivation and Context</h2>
@@ -236,18 +233,18 @@ window.Quarto = {
 <section id="packages-used-in-this-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="packages-used-in-this-analysis">Packages Used In This Analysis</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes) <span class="co"># don't need the rest of tidymodels</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(softImpute)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes) <span class="co"># don't need the rest of tidymodels</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(softImpute)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <table class="caption-top table">
 <thead>
@@ -306,13 +303,13 @@ window.Quarto = {
 </section>
 <section id="data-description" class="level2">
 <h2 class="anchored" data-anchor-id="data-description">Data Description</h2>
-<p>The dataset used in this project is the Portuguese Student Performance Data Set, available through education datasets on Kaggle <a href="https://www.kaggle.com/datasets/larsen0966/student-performance-data-set?utm_source=chatgpt.com">Student Performance Data Set</a> and sourced from two secondary schools in Portugal. The data was collected by researchers in 2005 and 2006 through surveys to analyze factors that influence student achievement, study patterns in student success, and explore the impact of socioeconomic and on learning outcomes in math and Portuguese language courses. It includes data on 649 students and captures a wide range of features such as demographics (age, sex, and address), family background (parental education and job), school support (extra tutoring, access to internet, travel time), personal habits (study time, free time, alcohol consumption), and academic performance across three grading periods: G1 (first trimester), G2 (second trimester), and G3 (final grade). This dataset provides a good foundation for analyzing how various personal and environmental factors influence academic outcomes.</p>
-<p>To understand my analysis, it’s also important to have some background knowledge about education systems, student performance metrics, and social factors that influence learning. In Portugal, and for this data in particular the target attribute G3 has a strong correlation with attributes G2 and G1. This occurs because G3 is the final year grade (issued at the 3rd trimester), while G1 and G2 correspond to the 1st and 2nd trimester grades. It is more difficult to predict G3 without G1 and G2. <span class="math inline">\(\textbf{Grades are typically on a 0–20 scale, with 10 as the minimum passing mark.}\)</span> <span class="math inline">\(\textbf{Compared to here in the U.S. high school years are generally sectioned}\)</span> <span class="math inline">\(\textbf{into semesters and students receive letter grades A, B, C, D, or F.}\)</span></p>
-<p>Student performance refers to how well a student meets academic benchmarks, typically measured through grades. Performance can be influenced by various factors, including socioeconomic background, parental involvement, and individual learning styles.</p>
-<p>Socioeconomic background referes to an individual’s or family’s economic and social position relative to others, based on factors like income, education level, and occupation. Socioeconomic factors and parental education levels may have different impacts due to cultural and systemic differences.</p>
+<p>The dataset used in this project is the Portuguese Student Performance Data Set, available through education datasets on Kaggle <a href="https://www.kaggle.com/datasets/larsen0966/student-performance-data-set?utm_source=chatgpt.com">Student Performance Data Set</a> and sourced from two secondary schools in Portugal. The data was collected by researchers in 2005 and 2006 through surveys to analyze factors that influence student achievement, study patterns in student success, and explore the impact of socioeconomic and on learning outcomes in math and Portuguese language courses. It includes data on 649 students and captures a wide range of features such as demographics (age, sex, and address), family background (parental education and job), school support (extra tutoring, access to internet, travel time), personal habits (study time, free time, alcohol consumption), and academic performance across three grading periods: <code>G1</code> (first trimester), <code>G2</code> (second trimester), and <code>G3</code> (final grade). This dataset provides a good foundation for analyzing how various personal and environmental factors influence academic outcomes.</p>
+<p>To understand my analysis, it’s also important to have some background knowledge about education systems, student performance metrics, and social factors that influence learning. In Portugal, and for this data in particular the target attribute <code>G3</code> has a strong correlation with attributes <code>G2</code> and <code>G1</code>. This occurs because <code>G3</code> is the final year grade (issued at the 3rd trimester), while <code>G1</code> and <code>G2</code> correspond to the 1st and 2nd trimester grades. It is more difficult to predict <code>G3</code> without <code>G1</code> and <code>G2</code>. Grades are typically on a 0–20 scale, with 10 as the minimum passing mark. Compared to here in the U.S. high school years are generally sectioned into semesters and students receive letter grades A, B, C, D, or F.</p>
+<p>Throughout this process I will refer to student performance, which describes how well a student meets academic benchmarks measured through their <code>G3</code> grades.</p>
+<p>Socioeconomic background refers to an individual’s or family’s economic and social position relative to others, based on factors like income, education level, and occupation. Socioeconomic factors and parental education levels may have different impacts due to cultural and systemic differences.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"student-por.csv"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"student-por.csv"</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 649 × 33
    school sex     age address famsize Pstatus  Medu  Fedu Mjob     Fjob   reason
@@ -338,88 +335,89 @@ window.Quarto = {
 <p><span class="math inline">\(\textbf{The data includes:}\)</span></p>
 <ul>
 <li><p>Two public schools in Portugal: Gabriel Pereira <span class="math inline">\(\textbf{(GP)}\)</span> and Mouzinho da Silveira <span class="math inline">\(\textbf{(MS)}\)</span></p></li>
-<li><p><span class="math inline">\(\textbf{school:}\)</span> student’s school (binary: ‘GP’ - Gabriel Pereira or ‘MS’ - Mousinho da Silveira)</p></li>
-<li><p><span class="math inline">\(\textbf{sex:}\)</span> student’s sex (binary: ‘F’ - female or ‘M’ - male)</p></li>
+<li><p><span class="math inline">\(\textbf{school:}\)</span> student’s school (binary: <code>GP</code> = Gabriel Pereira or <code>MS</code> = Mousinho da Silveira)</p></li>
+<li><p><span class="math inline">\(\textbf{sex:}\)</span> student’s sex (binary: <code>F</code> = female or <code>M</code> = male)</p></li>
 <li><p><span class="math inline">\(\textbf{age:}\)</span> student’s age (numeric: from 15 to 22)</p></li>
-<li><p><span class="math inline">\(\textbf{address:}\)</span> student’s home address type (binary: ‘U’ - urban or ‘R’ - rural)</p></li>
-<li><p><span class="math inline">\(\textbf{famsize:}\)</span> family size (binary: ‘LE3’ - ≤ 3 or ‘GT3’ - &gt; 3)</p></li>
-<li><p><span class="math inline">\(\textbf{Pstatus:}\)</span> parent’s cohabitation status (binary: ‘T’ - living together or ‘A’ - apart)</p></li>
-<li><p><span class="math inline">\(\textbf{Medu:}\)</span> mother’s education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade 3-&gt; secondary education or 4-higher education)</p></li>
-<li><p><span class="math inline">\(\textbf{Fedu:}\)</span> father’s education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade, 3 - secondary education or 4- higher education)</p></li>
-<li><p><span class="math inline">\(\textbf{Mjob:}\)</span> mother’s job (nominal: ‘teacher’, ‘health’ care related, civil ‘services’ (e.g.&nbsp;administrative or police), ‘at_home’ or ‘other’)</p></li>
-<li><p><span class="math inline">\(\textbf{Fjob:}\)</span> father’s job (nominal: ‘teacher’, ‘health’ care related, civil ‘services’ (administrative or police), ‘at_home’ or ‘other’)</p></li>
-<li><p><span class="math inline">\(\textbf{reason:}\)</span> reason to choose this school (nominal: close to ‘home’, school ‘reputation’, ‘course’ preference or ‘other’)</p></li>
-<li><p><span class="math inline">\(\textbf{guardian:}\)</span> student’s guardian (nominal: ‘mother’, ‘father’ or ‘other’)</p></li>
-<li><p><span class="math inline">\(\textbf{traveltime:}\)</span> home to school travel time (numeric: 1 - &lt;15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - &gt;1 hour)</p></li>
-<li><p><span class="math inline">\(\textbf{studytime:}\)</span> weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours)</p></li>
-<li><p><span class="math inline">\(\textbf{failures:}\)</span> number of past class failures (numeric: n if 1&lt;=n&lt;3, else 4)</p></li>
-<li><p><span class="math inline">\(\textbf{schoolsup:}\)</span> extra educational support (binary: yes or no)</p></li>
-<li><p><span class="math inline">\(\textbf{famsup:}\)</span> family educational support (binary: yes or no)</p></li>
-<li><p><span class="math inline">\(\textbf{paid:}\)</span> extra paid classes within the course subject (Math or Portuguese) (binary: yes or no)</p></li>
-<li><p><span class="math inline">\(\textbf{activities:}\)</span> extra-curricular activities (binary: yes or no)</p></li>
-<li><p><span class="math inline">\(\textbf{nursery:}\)</span> attended nursery school (binary: yes or no) higher: wants to take higher education (binary: yes or no)</p></li>
-<li><p><span class="math inline">\(\textbf{internet:}\)</span> Internet access at home (binary: yes or no)</p></li>
-<li><p><span class="math inline">\(\textbf{romantic:}\)</span> with a romantic relationship (binary: yes or no)</p></li>
-<li><p><span class="math inline">\(\textbf{famrel:}\)</span> quality of family relationships (numeric: from 1 - very bad to 5 - excellent)</p></li>
-<li><p><span class="math inline">\(\textbf{freetime:}\)</span> free time after school (numeric: from 1 - very low to 5 - very high)</p></li>
-<li><p><span class="math inline">\(\textbf{goout:}\)</span> going out with friends (numeric: from 1 - very low to 5 - very high)</p></li>
-<li><p><span class="math inline">\(\textbf{Dalc:}\)</span> workday alcohol consumption (numeric: from 1 - very low to 5 - very high)</p></li>
-<li><p><span class="math inline">\(\textbf{Walc:}\)</span> weekend alcohol consumption (numeric: from 1 - very low to 5 - very high)</p></li>
-<li><p><span class="math inline">\(\textbf{health:}\)</span> current health status (numeric: from 1 - very bad to 5 - very good)</p></li>
-<li><p><span class="math inline">\(\textbf{absences:}\)</span> number of school absences (numeric: from 0 to 93)</p></li>
-<li><p><span class="math inline">\(\textbf{G1:}\)</span> first period grade (numeric: from 0 to 20)</p></li>
-<li><p><span class="math inline">\(\textbf{G2:}\)</span> second period grade (numeric: from 0 to 20)</p></li>
-<li><p><span class="math inline">\(\textbf{G3:}\)</span> final grade (numeric: from 0 to 20, output target)</p></li>
+<li><p><span class="math inline">\(\textbf{address:}\)</span> student’s home address type (binary: <code>U</code> = urban or <code>R</code> = rural)</p></li>
+<li><p><span class="math inline">\(\textbf{famsize:}\)</span> family size (binary: <code>LE3</code> = less than or equal 3 or <code>GT3</code> = greater than 3)</p></li>
+<li><p><span class="math inline">\(\textbf{Pstatus:}\)</span> parent’s cohabitation status (binary: <code>T</code> = living together or <code>A</code> = apart)</p></li>
+<li><p><span class="math inline">\(\textbf{Medu:}\)</span> mother’s education (numeric: <code>0</code> = none, <code>1</code> = primary education (4th grade), <code>2</code> = 5th to 9th grade <code>3</code> = secondary education or <code>4</code> = higher education)</p></li>
+<li><p><span class="math inline">\(\textbf{Fedu:}\)</span> father’s education (numeric: <code>0</code> = none, <code>1</code> = primary education (4th grade), <code>2</code> = 5th to 9th grade <code>3</code> = secondary education or <code>4</code> = higher education))</p></li>
+<li><p><span class="math inline">\(\textbf{Mjob:}\)</span> mother’s job (nominal: <code>teacher</code>, <code>health care related</code>, <code>civil services</code> (administrative or police), <code>at_home</code> or <code>other</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{Fjob:}\)</span> father’s job (nominal: <code>teacher</code>, <code>health care related</code>, <code>civil services</code> (administrative or police), <code>at_home</code> or <code>other</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{reason:}\)</span> reason to choose this school (nominal: close to <code>home</code>, <code>school reputation</code>, <code>course preference</code> or <code>other</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{guardian:}\)</span> student’s guardian (nominal: <code>mother</code>, <code>father</code> or <code>other</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{traveltime:}\)</span> home to school travel time (numeric: <code>1</code> = less than 15 min., <code>2</code> = 15 to 30 min., <code>3</code> = 30 min. to 1 hour, or <code>4</code> = more than 1 hour)</p></li>
+<li><p><span class="math inline">\(\textbf{studytime:}\)</span> weekly study time (numeric: <code>1</code> = less than 2 hours, <code>2</code> = 2-5 hours, <code>3</code> = 5-10 hours, or <code>4</code> = more than 10 hours)</p></li>
+<li><p><span class="math inline">\(\textbf{failures:}\)</span> number of past class failures (numeric: n if 1&lt;=n&lt;3, else <code>4</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{schoolsup:}\)</span> extra educational support (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{famsup:}\)</span> family educational support (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{paid:}\)</span> extra paid classes within the course subject (Math or Portuguese) (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{activities:}\)</span> extra-curricular activities (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{nursery:}\)</span> attended nursery school (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{higher:}\)</span> wants to take higher education (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{internet:}\)</span> Internet access at home (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{romantic:}\)</span> with a romantic relationship (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{famrel:}\)</span> quality of family relationships (numeric: from <code>1</code> - very bad to <code>5</code> - excellent)</p></li>
+<li><p><span class="math inline">\(\textbf{freetime:}\)</span> free time after school (numeric: from <code>1</code> - very low to <code>5</code> - very high)</p></li>
+<li><p><span class="math inline">\(\textbf{goout:}\)</span> going out with friends (numeric: from <code>1</code> - very low to <code>5</code> - very high)</p></li>
+<li><p><span class="math inline">\(\textbf{Dalc:}\)</span> workday alcohol consumption (numeric: from <code>1</code> - very low to <code>5</code> - very high)</p></li>
+<li><p><span class="math inline">\(\textbf{Walc:}\)</span> weekend alcohol consumption (numeric: from <code>1</code> - very low to <code>5</code> - very high)</p></li>
+<li><p><span class="math inline">\(\textbf{health:}\)</span> current health status (numeric: from <code>1</code> - very bad to <code>5</code> - very good)</p></li>
+<li><p><span class="math inline">\(\textbf{absences:}\)</span> number of school absences (numeric: from <code>0</code> to <code>93</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{G1:}\)</span> first period grade (numeric: from <code>0</code> to <code>20</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{G2:}\)</span> second period grade (numeric: from<code>0</code> to <code>20</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{G3:}\)</span> final grade (numeric: from <code>0</code> to <code>20</code>, output target)</p></li>
+</ul>
+<p>Student performance can be influenced by a variety of factors, in relation to my research question, I consider variables such as study time, parental education, and family support particularly relevant, as they can have a significant impact on a student’s academic success:</p>
+<ul>
+<li><p><span class="math inline">\(\textbf{Pstatus:}\)</span> parent’s cohabitation status (binary: <code>T</code> = living together or <code>A</code> = apart)</p></li>
+<li><p><span class="math inline">\(\textbf{Medu:}\)</span> mother’s education (numeric: <code>0</code> = none, <code>1</code> = primary education (4th grade), <code>2</code> = 5th to 9th grade <code>3</code> = secondary education or <code>4</code> = higher education)</p></li>
+<li><p><span class="math inline">\(\textbf{Fedu:}\)</span> father’s education (numeric: <code>0</code> = none, <code>1</code> = primary education (4th grade), <code>2</code> = 5th to 9th grade <code>3</code> = secondary education or <code>4</code> = higher education)</p></li>
+<li><p><span class="math inline">\(\textbf{guardian:}\)</span> student’s guardian (nominal: <code>mother</code>, <code>father</code> or <code>other</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{studytime:}\)</span> weekly study time (numeric: <code>1</code> = less than 2 hours, <code>2</code> = 2-5 hours, <code>3</code> = 5-10 hours, or <code>4</code> = more than 10 hours)</p></li>
+<li><p><span class="math inline">\(\textbf{famsup:}\)</span> family educational support (binary: <code>yes</code> or <code>no</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{G1:}\)</span> first period grade (numeric: from <code>0</code> to <code>20</code>)</p></li>
+<li><p><span class="math inline">\(\textbf{G2:}\)</span> second period grade (numeric: from <code>0</code> to <code>20</code>)</p></li>
+</ul>
+<p><span class="math inline">\(\textbf{The main response variable will be:}\)</span></p>
+<ul>
+<li><span class="math inline">\(\textbf{G3:}\)</span> final grade (numeric: from <code>0</code> to <code>20</code>, output target)</li>
 </ul>
 <section id="data-limitations" class="level3">
 <h3 class="anchored" data-anchor-id="data-limitations">Data Limitations</h3>
 <p>First, there may be biases in data collection methods. For example, self-reported study habits and parental involvement may not always be accurate because students or parents might overestimate or underestimate their efforts. Additionally, this data was collected from specific schools in a different country, which means the findings might not be generalizable to all student populations around the world or even here in the US.</p>
 <p>Second, is the mismatch between dataset variables and real-world educational experiences. For example, final grades may not reflect a student’s true learning abilities or potential, as they can be having a difficult school year or does poorly on exams or doesn’t do work for their grade.</p>
 <p>Third, geographic limitations could impact the model’s applicability. This data was collected in one country with one educational system that may not accurately reflect student performance in other areas due to cultural, economic, and policy differences.</p>
-<p>Finally, and importantly, there are ethical limitations to using statistical models to predict or describe student performance. While such models can help identify students in need of support, they also risk reinforcing stereotypes or lowering expectations. For example, if a model predicts that students from working-class or less-educated families are likely to underperform, it could lead to those students being tracked into less rigorous programs or receiving less encouragement.</p>
+<p>Finally, and importantly, there are some ethical limitations to using statistical models to predict or describe student performance. While such models can help identify students in need of support, they also risk reinforcing stereotypes or lowering expectations. For example, if a model predicts that students from working-class or less-educated families are likely to underperform, it could lead to those students being tracked into less rigorous programs or receiving less encouragement.</p>
 <p>This means that conclusions from my analysis may not be universally applicable and should be interpreted with these constraints in mind.</p>
 </section>
 </section>
 <section id="data-wrangling" class="level2">
 <h2 class="anchored" data-anchor-id="data-wrangling">Data Wrangling</h2>
-<p><span class="math inline">\(\textbf{We will be working with just a few varaibles:}\)</span></p>
-<ul>
-<li><p><span class="math inline">\(\textbf{Pstatus:}\)</span> parent’s cohabitation status (binary: ‘T’ - living together or ‘A’ - apart)</p></li>
-<li><p><span class="math inline">\(\textbf{Medu:}\)</span> mother’s education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade 3-&gt; secondary education or 4-higher education)</p></li>
-<li><p><span class="math inline">\(\textbf{Fedu:}\)</span> father’s education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade, 3 - secondary education or 4- higher education)</p></li>
-<li><p><span class="math inline">\(\textbf{guardian:}\)</span> student’s guardian (nominal: ‘mother’, ‘father’ or ‘other’)</p></li>
-<li><p><span class="math inline">\(\textbf{studytime:}\)</span> weekly study time (numeric: 1 - &lt;2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - &gt;10 hours)</p></li>
-<li><p><span class="math inline">\(\textbf{famsup:}\)</span> family educational support (binary: yes or no)</p></li>
-<li><p><span class="math inline">\(\textbf{G1:}\)</span> first period grade (numeric: from 0 to 20)</p></li>
-<li><p><span class="math inline">\(\textbf{G2:}\)</span> second period grade (numeric: from 0 to 20)</p></li>
-</ul>
-<p><span class="math inline">\(\textbf{The main response variable will be:}\)</span></p>
-<ul>
-<li><span class="math inline">\(\textbf{G3:}\)</span> final grade (numeric: from 0 to 20, output target)</li>
-</ul>
-<p>These are variables I think are important predictors for academic performance, as study time, parental education and family support can significantly impact a student’s success.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(data[,<span class="dv">1</span><span class="sc">:</span><span class="dv">33</span>]) <span class="co"># default row and column order</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(data[,<span class="dv">1</span><span class="sc">:</span><span class="dv">33</span>]) <span class="co"># default row and column order</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/Missing Data-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Since there is no missing data it does not makes sense to remove or impute any missing data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>student <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Pstatus, Fedu, Medu, guardian, studytime, famsup, G1, G2, G3)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>student <span class="ot">&lt;-</span> student <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pstatus =</span> <span class="fu">as.factor</span>(Pstatus),</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">guardian =</span> <span class="fu">as.factor</span>(guardian),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">studytime =</span> <span class="fu">as.factor</span>(studytime),</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">famsup =</span> <span class="fu">as.factor</span>(famsup)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>student</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>student <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Pstatus, Fedu, Medu, guardian, studytime, famsup, G1, G2, G3)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>student <span class="ot">&lt;-</span> student <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pstatus =</span> <span class="fu">as.factor</span>(Pstatus),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">guardian =</span> <span class="fu">as.factor</span>(guardian),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">studytime =</span> <span class="fu">as.factor</span>(studytime),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">famsup =</span> <span class="fu">as.factor</span>(famsup)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>student</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 649 × 9
    Pstatus  Fedu  Medu guardian studytime famsup    G1    G2    G3
@@ -438,48 +436,58 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>student_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(student, <span class="at">prop =</span> <span class="fl">0.80</span>)  <span class="co">#splitting data  (random sample, 80%)</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>student_train <span class="ot">&lt;-</span> <span class="fu">training</span>(student_split)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>student_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(student_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>student_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(student, <span class="at">prop =</span> <span class="fl">0.80</span>)  <span class="co">#splitting data  (random sample, 80%)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>student_train <span class="ot">&lt;-</span> <span class="fu">training</span>(student_split)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>student_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(student_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>student_train <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">miss_var_summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 9 × 3
-  variable  n_miss pct_miss
-  &lt;chr&gt;      &lt;int&gt;    &lt;num&gt;
-1 Pstatus        0        0
-2 Fedu           0        0
-3 Medu           0        0
-4 guardian       0        0
-5 studytime      0        0
-6 famsup         0        0
-7 G1             0        0
-8 G2             0        0
-9 G3             0        0</code></pre>
-</div>
-</div>
-<p>Since there is no missing data it does not makes sense to remove or impute any missing data.</p>
 </section>
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(student_train<span class="sc">$</span>famsup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(student_train<span class="sc">$</span>famsup)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  no yes 
 200 319 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_train, </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> famsup,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Family Support"</span>, <span class="at">x =</span> <span class="st">"Family Support"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_train, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> famsup,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Family Support"</span>, <span class="at">x =</span> <span class="st">"Family Support"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="437proj_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>I was interested in finding out how many students in this dataset receive support form their family and those who do not. It appears that in this dataset there are 319 students who do receive academic support form their family, more than students who do not, 200. This will help us understand the balance in the dataset and whether family support plays a role in student performance.</p>
+<p>Naturally, I thought the next step should be to visualize and compare the tendency and spread of this variable across <code>G1</code>, <code>G2</code>, and <code>G3</code> to see if family support results in better academic performance.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>student_G123 <span class="ot">&lt;-</span> student_train <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(G1, G2, G3), </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Term"</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_G123, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> famsup, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Grade, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Term) <span class="sc">+</span>  </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Grade Distribution by Family Support Across Terms"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Family Support"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -487,39 +495,10 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-</div>
-<p>I was interested in finding out how many students in this dataset receive support form their family and those who do not. It appears that in this dataset there are 319 students who do receive academic support form their family, more than students who do not, 200. This will help us understand the balance in the dataset and whether family support plays a role in student performance.</p>
-<p>Naturally, I thought the next step should be to visualize and compare the tendency and spread of this variable across G1 G2 and G3 to see if family support results in better academic performance.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>student_G123 <span class="ot">&lt;-</span> student_train <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(G1, G2, G3), </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Term"</span>, </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_G123, </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> famsup, </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Grade, </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Term) <span class="sc">+</span>  </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Grade Distribution by Family Support Across Terms"</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Family Support"</span>,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>means_by_group <span class="ot">&lt;-</span> student_G123 <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Term, famsup) <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_grade =</span> <span class="fu">mean</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>means_by_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>means_by_group <span class="ot">&lt;-</span> student_G123 <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Term, famsup) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_grade =</span> <span class="fu">mean</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>means_by_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   Term  famsup mean_grade
@@ -532,22 +511,22 @@ window.Quarto = {
 6 G3    yes          12.3</code></pre>
 </div>
 </div>
-<p>Based on the boxplots, there does not seem to be a significant difference in academic achievement based on whether or not a student receives academic support from their family. The mean for G1 grades in group <code>no</code> is 11.4 and the mean in group <code>yes</code> is 11.6. The mean is higher for the <code>yes</code> group but this may be due to the fact that there are more students who have family support than those who don’t. The means are fairly close. The mean for G2 grades in group <code>no</code> is 11.5 and the mean in group <code>yes</code> is 11.8. The mean is higher for the <code>yes</code> group. The means for G2 grades are also fairly close. The same can be said about grades for G3 grades. The mean for G3 grades in group <code>no</code> is 11.7 and the mean in group <code>yes</code> is 12.3.</p>
+<p>Based on the boxplots, there does not seem to be a significant difference in academic achievement based on whether or not a student receives academic support from their family. The mean for <code>G1</code> grades in group <code>no</code> is 11.4 and the mean in group <code>yes</code> is 11.6. The mean is higher for the <code>yes</code> group but this may be due to the fact that there are more students who have family support than those who don’t. The means are fairly close. The mean for <code>G2</code> grades in group <code>no</code> is 11.5 and the mean in group <code>yes</code> is 11.8. The mean is higher for the <code>yes</code> group. The means for <code>G2</code> grades are also fairly close. The same can be said about grades for <code>G3</code> grades. The mean for <code>G3</code> grades in group <code>no</code> is 11.7 and the mean in group <code>yes</code> is 12.3.</p>
 <p>I also created a bar graph for more visual evidence. They seem very similar to each other. Family support may play a role in student performance.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_G123,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Grade,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_grid</span>(</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="at">rows =</span> <span class="fu">vars</span>(famsup), <span class="at">cols =</span> <span class="fu">vars</span>(Term)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_G123,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Grade,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">facet_grid</span>(</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="at">rows =</span> <span class="fu">vars</span>(famsup), <span class="at">cols =</span> <span class="fu">vars</span>(Term)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -555,10 +534,10 @@ window.Quarto = {
 <p>The bar graphs also seem to have similar distributions but we can also see that the <code>yes</code> group for all the grades has a higher count.</p>
 <p>Since no strong association was found, I decided to see if parental education was associated with academic success. My initial assumption without exploring the data is that the higher the education that parents received the more likely the student will follow in their footsteps and have better chances of academic success.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>student_train <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Fedu) <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_G3 =</span> <span class="fu">mean</span>(G3, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>student_train <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Fedu) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_G3 =</span> <span class="fu">mean</span>(G3, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
    Fedu mean_G3 count
@@ -569,25 +548,25 @@ window.Quarto = {
 4     3    12.7   102
 5     4    12.9   106</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_G123, </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Fedu,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Father's Education"</span>, <span class="at">x =</span> <span class="st">"Education Level"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_G123, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Fedu,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Father's Education"</span>, <span class="at">x =</span> <span class="st">"Education Level"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>student_train <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Medu) <span class="sc">|&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_G3 =</span> <span class="fu">mean</span>(G3, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>student_train <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Medu) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_G3 =</span> <span class="fu">mean</span>(G3, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
    Medu mean_G3 count
@@ -598,84 +577,84 @@ window.Quarto = {
 4     3    12.0   107
 5     4    13.2   143</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_G123, </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Medu,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Mother's Education"</span>, <span class="at">x =</span> <span class="st">"Education Level"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_G123, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Medu,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> famsup)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Mother's Education"</span>, <span class="at">x =</span> <span class="st">"Education Level"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>The mean final grade (G3) for each level of Fedu:</p>
+<p>The mean final grade (<code>G3</code>) for each level of <code>Fedu</code>:</p>
 <ul>
-<li><p>0 (no education): average final grade is 13</p></li>
-<li><p>1 (primary education up to 4th grade): average final grade is 11.2</p></li>
-<li><p>2 (primary education 5th to 9th grade): average final grade is 11.8</p></li>
-<li><p>3 (secondary education 10th to 12th): average final grade is 12.7</p></li>
+<li><p><code>0</code> (no education): average final grade is 13</p></li>
+<li><p><code>1</code> (primary education up to 4th grade): average final grade is 11.2</p></li>
+<li><p><code>2</code> (primary education 5th to 9th grade): average final grade is 11.8</p></li>
+<li><p><code>3</code> (secondary education 10th to 12th): average final grade is 12.7</p></li>
+<li><p><code>4</code> (higher education): average final grade is 12.9</p></li>
 </ul>
-<p>*4 (higher education): average final grade is 12.9</p>
-<p>The first summary reveals that final grades tend to increas as the fathers level of education increases.</p>
-<p>The mean final grade (G3) for each level of Medu:</p>
+<p>The first summary reveals that final grades tend to increases as the fathers level of education increases.</p>
+<p>The mean final grade (<code>G3</code>) for each level of <code>Medu</code>:</p>
 <ul>
-<li><p>0 (no education): average final grade is 11</p></li>
-<li><p>1 (primary education up to 4th grade): average final grade is 11.1</p></li>
-<li><p>2 (primary education 5th to 9th grade): average final grade is 11.7</p></li>
-<li><p>3 (secondary education 10th to 12th): average final grade is 12</p></li>
-<li><p>4 (higher education): average final grade is 13.2</p></li>
+<li><p><code>0</code> (no education): average final grade is 11</p></li>
+<li><p><code>1</code> (primary education up to 4th grade): average final grade is 11.1</p></li>
+<li><p><code>2</code> (primary education 5th to 9th grade): average final grade is 11.7</p></li>
+<li><p><code>3</code> (secondary education 10th to 12th): average final grade is 12</p></li>
+<li><p><code>4</code> (higher education): average final grade is 13.2</p></li>
 </ul>
 <p>The second summary reveals that final grades also tend to increase as the mothers level of education increases but it is not as high as the average final grades when the father is educated.</p>
 <p>There does seem to be a pattern so next I wanted to determine whether students with more educated parents perform better or if one parent in particular that is educated has a greater effect than the other.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_G123, </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Fedu, </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Grade,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> famsup</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Term) <span class="sc">+</span> </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Father's Education vs. Final Grades"</span>,</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Father's Education Level"</span>,</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Final Grades"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_G123, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Fedu, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Grade,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> famsup</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Term) <span class="sc">+</span> </span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Father's Education vs. Final Grades"</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Father's Education Level"</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Final Grades"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_G123, </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Medu, </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Grade,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> famsup</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Term) <span class="sc">+</span> </span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Mother's Education vs. Final Grades"</span>,</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Mother's Education Level"</span>,</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Final Grades"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_G123, </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> Medu, </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Grade,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> famsup</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Term) <span class="sc">+</span> </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Mother's Education vs. Final Grades"</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Mother's Education Level"</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Final Grades"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -683,37 +662,37 @@ window.Quarto = {
 <p>The scatter plots help visualize the relationships between each parents educational level and the students academic success. There is a positive relationship between each variable. As the parents educational level increases, for both the mother and father, the student does achieve higher grades. Though it is hard to notice the line for the fathers education is slightly higher in comparison to the mothers education line. So at every level for fathers education the average final grades are higher than it is for mothers at the same levels of education. The fathers education correlates to the students grades and has a greater impact on their grades than the mother being educated.</p>
 <p>Another variable that I wanted to take a look at was <code>study time</code>. It would make sense that the more a student studies the higher the grades.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_G123,</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> studytime,</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Grade,</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> Pstatus</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>         )</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Term) <span class="sc">+</span>  </span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Grade Distribution by Study Times Across Terms"</span>,</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Study Time"</span>,</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> student_G123,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> studytime,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> Grade,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> Pstatus</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>         )</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Term) <span class="sc">+</span>  </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Grade Distribution by Study Times Across Terms"</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Study Time"</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Grade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>student_G123 <span class="sc">|&gt;</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pstatus, Term) <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_total =</span> <span class="fu">n</span>(),</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="fu">median</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>student_G123 <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Pstatus, Term) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_total =</span> <span class="fu">n</span>(),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="fu">median</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(Grade, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'Pstatus'. You can override using the
 `.groups` argument.</code></pre>
@@ -731,12 +710,12 @@ window.Quarto = {
 6 T       G3          460     0     12    19  12.0  3.16</code></pre>
 </div>
 </div>
-<p>It is somewhat evident that study time does effect the students grades</p>
+<p>It is somewhat evident that study time does effect the students grades. It is more evident that students who study over 10 hours with parents that are together obtain higher grades on average than students who study over 10 hours with parents that are not together</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>student_train <span class="sc">|&gt;</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(guardian) <span class="sc">|&gt;</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_G3 =</span> <span class="fu">mean</span>(G3, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>student_train <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(guardian) <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_G3 =</span> <span class="fu">mean</span>(G3, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   guardian mean_G3 count
@@ -745,56 +724,56 @@ window.Quarto = {
 2 mother      12.0   364
 3 other       11.1    28</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student, <span class="fu">aes</span>(<span class="at">x =</span> guardian, <span class="at">fill =</span> guardian)) <span class="sc">+</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Primary Caregiver Distribution"</span>,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Guardian"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student, <span class="fu">aes</span>(<span class="at">x =</span> guardian, <span class="at">fill =</span> guardian)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Primary Caregiver Distribution"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Guardian"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>This shows how many students report their main guardian as mother then father then other which can also be used to investigate if different guardianship types affect grades or behavior, absences, and even health. The mean for those who report their father as their guardian have the highest average grades</p>
+<p>This shows how many students report their main guardian as mother then father then other which can also be used to investigate if different guardianship types affect grades or behavior, absences, and even health. The mean for those who report their father as their guardian have the highest average grades.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student, <span class="fu">aes</span>(<span class="at">x =</span> G1)) <span class="sc">+</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"pink"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of G1 (First Trimester Grades)"</span>, <span class="at">x =</span> <span class="st">"G1"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student, <span class="fu">aes</span>(<span class="at">x =</span> G1)) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"pink"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of G1 (First Trimester Grades)"</span>, <span class="at">x =</span> <span class="st">"G1"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student, <span class="fu">aes</span>(<span class="at">x =</span> G2)) <span class="sc">+</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"lavender"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of G2 (Second Trimester Grades)"</span>, <span class="at">x =</span> <span class="st">"G2"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student, <span class="fu">aes</span>(<span class="at">x =</span> G2)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"lavender"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of G2 (Second Trimester Grades)"</span>, <span class="at">x =</span> <span class="st">"G2"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student, <span class="fu">aes</span>(<span class="at">x =</span> G3)) <span class="sc">+</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of G3 (Final Grades)"</span>, <span class="at">x =</span> <span class="st">"G3"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student, <span class="fu">aes</span>(<span class="at">x =</span> G3)) <span class="sc">+</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of G3 (Final Grades)"</span>, <span class="at">x =</span> <span class="st">"G3"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-15-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>As expected the distributions for G1, G2, G3 are nearly identical and both G1 and G2 are good predictors for G3.</p>
+<p>As expected the distributions for <code>G1</code>, <code>G2</code>, <code>G3</code> are nearly identical and both <code>G1</code> and <code>G2</code> are good predictors for <code>G3</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(student[, <span class="fu">c</span>(<span class="st">"G1"</span>, <span class="st">"G2"</span>, <span class="st">"G3"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(student[, <span class="fu">c</span>(<span class="st">"G1"</span>, <span class="st">"G2"</span>, <span class="st">"G3"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          G1        G2        G3
 G1 1.0000000 0.8649816 0.8263871
@@ -802,22 +781,29 @@ G2 0.8649816 1.0000000 0.9185480
 G3 0.8263871 0.9185480 1.0000000</code></pre>
 </div>
 </div>
-<p>Again, as expected there are very high positive correlations between G1, G2, and G3. This analysis confirms that a linear model using G1 and G2 to predict G3 is appropriate.</p>
+<p>Again, as expected there are very high positive correlations between <code>G1</code>, <code>G2</code>, and <code>G3</code>. This analysis confirms that a linear model using <code>G1</code> and <code>G2</code> to predict <code>G3</code> is appropriate.</p>
 </section>
 <section id="modeling" class="level2">
 <h2 class="anchored" data-anchor-id="modeling">Modeling</h2>
-<p>For this section I think that using PCA and clustering are good choices for this data, especially since my goal is exploration and inference rather than strict prediction.</p>
-<p><span class="math inline">\(\textbf{Why PCA and Clustering?}\)</span></p>
-<p>PCA and clustering are both unsupervised learning techniques that help uncover hidden structure in the data. There are a lot of variables and we want to get the most out of our data without it being overly complicated, PCA reduces dimensions by identifying principal components that explain the most variance in the data. It helps reveal underlying patterns while simplifying the feature space. I also want to know what patterns exist within the data, clustering groups similar observations together based on selected features. It helps explore whether certain student profiles naturally emerge and whether those profiles relate to academic performance or support structures.</p>
+<p>For this section I think that using PCA and multinomial logistic regression and clustering are good choices for this data, especially since my goal is not just exploration but also prediction.</p>
+<p>Multinomial logistic regression is used when there is more than two categorical response variables. Since I want to distinguish the difference between students who are performing well or not, I will be categorizing final grades <code>G3</code> into 3 levels.</p>
+<ul>
+<li><p>“low” if <code>G3</code> &lt; 10</p></li>
+<li><p>“medium” if <code>G3</code> 10–14</p></li>
+<li><p>“high” if <code>G3</code> ≥ 15</p></li>
+</ul>
+<p><span class="math inline">\(\textbf{Why PCA and Linear regression?}\)</span></p>
+<p>PCA is an unsupervised learning technique that helps uncover hidden structure in the data. There are a lot of variables and we want to get the most out of our data without it being overly complicated, PCA reduces dimensions by identifying principal components that explain the most variance in the data. It helps reveal underlying patterns while simplifying the feature space.</p>
+<p>Using a multinomial logistic regressionn we can predict the probability of belonging to each grade category based on the principal components. And because we are using PCA-reduced predictors, our model will be more stable (no multicollinearity) and easier to interpret</p>
 <p><span class="math inline">\(\textbf{Principal Component Analysis}\)</span></p>
 <p>Before we fit the models, we must:</p>
 <p>Remove non-numeric variables and or convert categorical variables into numeric. Then we scale/standardize the numeric variables so that they contribute equally to distance calculations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a recipe for preprocessing</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>student_pca_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(G3 <span class="sc">~</span> ., <span class="at">data =</span> student_train) <span class="sc">|&gt;</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_center</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_scale</span>(<span class="fu">all_numeric_predictors</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a recipe for pre-processing</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>student_pca_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(G3 <span class="sc">~</span> ., <span class="at">data =</span> student_train) <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_center</span>(<span class="fu">all_numeric_predictors</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_scale</span>(<span class="fu">all_numeric_predictors</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><span class="math inline">\(\textbf{Why this matters for PCA}\)</span></p>
 <p>PCA is very sensitive to scale. Variables with higher variances will dominate the principal components unless the data is standardized. This recipe ensures:</p>
@@ -828,23 +814,21 @@ G3 0.8263871 0.9185480 1.0000000</code></pre>
 </ul>
 <p>Here we fit and visualize the principal components.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This step learns everything needed to transform the training data.</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>student_pca_prep <span class="ot">&lt;-</span> student_pca_recipe <span class="sc">|&gt;</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>() <span class="co">#prepares the recipe by estimating means and standard deviations </span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>student_pca_baked <span class="ot">&lt;-</span> <span class="fu">bake</span>(student_pca_prep, <span class="at">new_data =</span> <span class="cn">NULL</span>) <span class="sc">|&gt;</span> <span class="co">#bake() applies the recipe (centered, scaled, dummified) to the training data.</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>G3)</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">#new_data = NULL means it’s applying the recipe to the original training set used in prep().</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>student_pca_prep <span class="ot">&lt;-</span> student_pca_recipe <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prep</span>()  </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>student_pca_baked <span class="ot">&lt;-</span> <span class="fu">bake</span>(student_pca_prep, <span class="at">new_data =</span> <span class="cn">NULL</span>) <span class="sc">|&gt;</span> <span class="co">#bake() applies the recipe (centered, scaled, dummified) to the training data.</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>G3)</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">#new_data = NULL means it’s applying the recipe to the original training set used in prep().</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>This step learns everything needed to transform the training data and prepares the recipe by estimating means and standard deviations</p>
+<p>This next step runs PCA on preprocessed dataset using <code>prcomp()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>student_pca_model <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(student_pca_baked, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Runs PCA on preprocessed dataset using prcomp().</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#center = TRUE and scale. = TRUE are redundant here but it doesn’t hurt.</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>student_pca_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply PCA</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>student_pca_model <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(student_pca_baked, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>) <span class="co">#center = TRUE and scale. = TRUE are redundant here but it doesn’t hurt.</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>student_pca_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Standard deviations (1, .., p=11):
  [1] 1.5365381 1.2330523 1.1571542 1.1493167 1.0439784 0.9969748 0.9659350
@@ -889,49 +873,51 @@ studytime_X4     0.0253692595 -0.023849527
 famsup_yes       0.0006507615  0.017007752</code></pre>
 </div>
 </div>
+<p>To get a better understanding we will extract a summary of the <code>student_pca_model</code>. This gives us the standard deviation, proportion of variance explained by each PC, and cumulative variance. We will also plot the proportion of variance explained by each principal component.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>student_pca_pve <span class="ot">&lt;-</span> student_pca_model <span class="sc">|&gt;</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="at">matrix =</span> <span class="st">"pcs"</span>)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_pca_pve,</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC, </span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> percent)) <span class="sc">+</span></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of PCs"</span>,</span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="at">y =</span> <span class="st">"Proportion of Variance Explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>student_pca_pve <span class="ot">&lt;-</span> student_pca_model <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>(<span class="at">matrix =</span> <span class="st">"pcs"</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_pca_pve,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC, </span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> percent)) <span class="sc">+</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of PCs"</span>,</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="at">y =</span> <span class="st">"Proportion of Variance Explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/Proportion of Variance Explained-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>The plot helps us visually decide how many PCs to keep (often looking for the “elbow”)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_pca_pve,</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC, </span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> cumulative)) <span class="sc">+</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of PCs"</span>,</span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="at">y =</span> <span class="st">"Cumulative Proportion of Variance Explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_pca_pve,</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC, </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> cumulative)) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.8</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of PCs"</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="at">y =</span> <span class="st">"Cumulative Proportion of Variance Explained"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/scree plot-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>explained_var <span class="ot">&lt;-</span> <span class="fu">summary</span>(student_pca_model)<span class="sc">$</span>importance[<span class="dv">3</span>, ]</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(explained_var <span class="sc">&gt;=</span> <span class="fl">0.80</span>)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>explained_var <span class="ot">&lt;-</span> <span class="fu">summary</span>(student_pca_model)<span class="sc">$</span>importance[<span class="dv">3</span>, ]</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(explained_var <span class="sc">&gt;=</span> <span class="fl">0.80</span>)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>PC7 
   7 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(student_pca_model)<span class="sc">$</span>importance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(student_pca_model)<span class="sc">$</span>importance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            PC1      PC2      PC3      PC4      PC5       PC6
 Standard deviation     1.536538 1.233052 1.157154 1.149317 1.043978 0.9969748
@@ -944,99 +930,106 @@ Cumulative Proportion  0.868930 0.9220100 0.9592400 0.9887300 1.0000000</code></
 </div>
 </div>
 <p>The scree plot shows how much variance is explained by each principal component. The summary shows us standard deviation, proportion of variance, and cumulative proportion of each component which can also help with determining how many components to keep.</p>
-<p>Looking at the scree plots and the summary combined, we would reduce dimensionality while also preserving as much meaningful information as possible by keeping 7 components to explain about at least 80% of the variance. Which is good and bad. Good because we significantly reduced the number of dimensions, from 12 variables to just 7 while still capturing a lot of variance, bad because this many components is difficult to interpret.</p>
+<p>Looking at the scree plots and the summary combined, we would reduce dimensionality while also preserving as much meaningful information as possible by keeping 7 components to explain about at least 80% of the variance. Which is good and bad. Good because we significantly reduced the number of dimensions, from 11 variables to just 7 while still capturing a lot of variance, bad because this many components is difficult to interpret.</p>
 <p>While the first 7 principal components explain about 87% of the variance in the dataset, I chose to proceed with just the first 2 principal components. This decision is motivated by the goal of exploratory analysis and visualization. Using 2 components allows for interpretable, two-dimensional plots, such as biplots and cluster visualizations, that reveal broad patterns and relationships between variables and student groups.</p>
-<p>Although only a smaller portion of the total variance is retained, about 39%, these first two components still capture the most dominant axes of variation in the data. They are particularly useful for uncovering meaningful group structure and identifying how key variables relate to one another in reduced space. The trade-off is that this level of reduction sacrifices some detail but it significantly enhances interpretability and visual insight, which is appropriate given the objectives of this part of the analysis.</p>
+<p>Although only a smaller portion of the total variance is retained, about 35%, these first two components still capture the most dominant axes of variation in the data. They are particularly useful for uncovering meaningful group structure and identifying how key variables relate to one another in reduced space. The trade-off is that this level of reduction sacrifices some detail but it significantly enhances interpretability and visual insight, which is appropriate given the objectives of this part of the analysis.</p>
 <p>To visualize the relationship between these variables and observations in a 2D biplot we obtain the following:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(student_pca_model,</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">scale =</span> <span class="dv">0</span>,</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.9</span>, <span class="co"># Shrinks text size</span></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Biplot of Student PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(student_pca_model,</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">scale =</span> <span class="dv">0</span>,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.9</span>, <span class="co"># Shrinks text size</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Biplot of Student PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/biplot-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We can make this slightly more interpretable by thinning the amount of observations we allow in the biplot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(student_pca_model<span class="sc">$</span>x) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(student_pca_baked)</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>random_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(student_pca_model<span class="sc">$</span>x), <span class="dv">100</span>) <span class="co">#100 obervations</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> student_pca_model<span class="sc">$</span>x[random_rows,],</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> student_pca_model<span class="sc">$</span>rotation</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(student_pca_model<span class="sc">$</span>x) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(student_pca_baked)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>random_rows <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(student_pca_model<span class="sc">$</span>x), <span class="dv">100</span>) <span class="co">#100 obervations</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> student_pca_model<span class="sc">$</span>x[random_rows,],</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> student_pca_model<span class="sc">$</span>rotation</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/biplot reduced-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Personally I think it would take an extra step to really see what each component represents.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>loadings <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(student_pca_model<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>loadings<span class="sc">$</span>var <span class="ot">&lt;-</span> <span class="fu">rownames</span>(loadings)</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(loadings, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">label =</span> var)) <span class="sc">+</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> PC1, <span class="at">yend =</span> PC2), </span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="fl">1.2</span>, <span class="at">size =</span> <span class="fl">1.95</span>) <span class="sc">+</span></span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Variable Loadings on PC1 and PC2"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>loadings <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(student_pca_model<span class="sc">$</span>rotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>loadings<span class="sc">$</span>var <span class="ot">&lt;-</span> <span class="fu">rownames</span>(loadings)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(loadings, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">label =</span> var)) <span class="sc">+</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> PC1, <span class="at">yend =</span> PC2), </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">"cm"</span>)), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust =</span> <span class="fl">1.2</span>, <span class="at">size =</span> <span class="fl">1.95</span>) <span class="sc">+</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Variable Loadings on PC1 and PC2"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/biplot zoomed-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>First off, there are only two components: PC1 (horizontal axis) and PC2 (vertical axis). Second, the numbers (-1.0 to 1.0) represent standardized scores, recall that they are scaled, so each axis is measured in standard deviation units. Third, each arrow on the plot represents a variable (feature) from the dataset and are positioned in this new 2D space based on how much it contributes to or aligns with these components. The direction shows how strongly that variable is aligned with each principal component. Arrows pointing to the right contribute more to PC1. Similaryly, arrows pointing up contribute more to PC2. Their lengths represent their importance. The longer the arrow, the more important that variable is in shaping the component. Shorter arrows mean the variable has less influence on PC1 and PC2. With this knowlege we can no interpret the biplot.</p>
-<p>Based on the biplot, PC1 appears to represent academic performance and parental education. Variables like Fedu, Medu, G1, and G2 load strongly to the right, suggesting that students with more educated parents tend to earn better grades.</p>
+<p>First off, there are only two components: <code>PC1</code> (horizontal axis) and <code>PC2</code> (vertical axis). Second, the numbers (-1.0 to 1.0) represent standardized scores, recall that they are scaled, so each axis is measured in standard deviation units. Third, each arrow on the plot represents a variable (feature) from the dataset and are positioned in this new 2D space based on how much it contributes to or aligns with these components. The direction shows how strongly that variable is aligned with each principal component. Arrows pointing to the right contribute more to <code>PC1</code>. Similaryly, arrows pointing up contribute more to <code>PC2</code>. Their lengths represent their importance. The longer the arrow, the more important that variable is in shaping the component. Shorter arrows mean the variable has less influence on <code>PC1</code> and <code>PC2</code>. With this knowledge we can now interpret the biplot.</p>
+<p>Based on the biplot, <code>PC1</code> appears to represent academic performance and parental education. Variables like <code>Fedu</code>, <code>Medu</code>, <code>G1</code>, and <code>G2</code> load strongly to the right, suggesting that students with more educated parents tend to earn better grades.</p>
 <ul>
-<li><p>Higher PC1 <span class="math inline">\(\rightarrow\)</span> stronger academic performance and more educated parents</p></li>
-<li><p>Lower PC1 <span class="math inline">\(\rightarrow\)</span> weaker grades, possibly less academic support at home</p></li>
+<li><p>Higher <code>PC1</code> <span class="math inline">\(\rightarrow\)</span> stronger academic performance and more educated parents</p></li>
+<li><p>Lower <code>PC1</code> <span class="math inline">\(\rightarrow\)</span> weaker grades, possibly less academic support at home</p></li>
 </ul>
-<p>PC2 seems to capture student student independence, instability, or reduced traditional support. Variables like guardian_other, Pstatus_T, and studytime_X3, load strongly pointing downward, suggesting that students these students might correspond to more non-traditional guardianship (like not living with both parents).</p>
+<p><code>PC2</code> seems to capture student student independence, instability, or reduced traditional support. Variables like <code>guardian_other</code>, <code>Pstatus_T</code>, and <code>studytime_X3</code>, load strongly pointing downward, suggesting that students these students might correspond to more non-traditional guardianship (like not living with both parents).</p>
 <ul>
-<li><p>Higher PC2 <span class="math inline">\(\rightarrow\)</span> possibly more instability or nontraditional support</p></li>
-<li><p>Lower PC2 <span class="math inline">\(\rightarrow\)</span> more consistent support structures, potentially more engaged guardians</p></li>
+<li><p>Higher <code>PC2</code> <span class="math inline">\(\rightarrow\)</span> possibly more instability or nontraditional support</p></li>
+<li><p>Lower <code>PC2</code> <span class="math inline">\(\rightarrow\)</span> more consistent support structures, potentially more engaged guardians</p></li>
 </ul>
-<p>Together, these components suggest that students’ final grades (G3) are shaped not only by family educational background but also by their home environment and education support.</p>
+<p>Together, these components suggest that students’ final grades (<code>G3</code>) are shaped not only by family educational background but also by their home environment and education support.</p>
 <p><span class="math display">\[\text{PC1} = 0.4094\times(Fedu) + 0.4372\times(Medu) + 0.5262\times(G1) + 0.5271\times(G2) - 0.052\times(Pstatus = T) + 0.0427\times(guardian = mother) - 0.1491\times(guardian = other) + 0.0013\times(studytime = X2) + 0.1817\times(studytime = X3) + 0.0870\times(studytime = X4) + 0.1384\times(famsup = yes)\]</span></p>
 <p><span class="math inline">\(\text{PC2} = - 0.1995\times(Fedu) - 0.2228\times(Medu) + 0.1501\times(G1) + 0.1686\times(G2) + 0.2605\times(Pstatus = T) - 0.3441\times(guardian = mother) + 0.3256\times(guardian = other) - 0.5552\times(studytime = X2) + 0.4240\times(studytime = X3) + 0.2687\times(studytime = X4) - 0.0839\times(famsup = yes)\)</span></p>
-<p>This equation shows how PC1 and PC2 are computed as a linear combinations of the original variables, each weighted by a coefficient (loading).</p>
-<p>The larger the absolute value of a coefficient, the more that variable contributes to eac principal component.The sign (positive/negative) tells you the direction of that influence.</p>
+<p>This equation shows how <code>PC1</code> and <code>PC2</code> are computed as a linear combinations of the original variables, each weighted by a coefficient (loading). The larger the absolute value of a coefficient, the more that variable contributes to eac principal component.The sign (positive/negative) tells you the direction of that influence.</p>
 <p><span class="math inline">\(\textbf{Build a multinomial logistic regression model using PCA output and a categorized version of G3.}\)</span></p>
+<p>We will create a new categorical variable in the training dataset by grouping final grades (<code>G3</code>) into performance categories.</p>
+<p>Multinomial logistic regression requires a categorical response variable. Since G3 is originally numerical, this step converts it into qualitative categories suitable for classification models.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#categorizing</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>student_multinom_data <span class="ot">&lt;-</span> student_train <span class="sc">|&gt;</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">G3_category =</span> <span class="fu">case_when</span>(</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"low"</span>,         <span class="co"># Failing or poor performance</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span> G3 <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"medium"</span>,  <span class="co"># Average performance</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"high"</span>        <span class="co"># High-performing students</span></span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>student_multinom_data <span class="ot">&lt;-</span> student_train <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">G3_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"low"</span>,         <span class="co"># Failing or poor performance</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span> G3 <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"medium"</span>,  <span class="co"># Average performance</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    G3 <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"high"</span>        <span class="co"># High-performing students</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>We have defined three categories of academic performance based on <code>G3</code>, the final grade:</p>
+<ul>
+<li><p>“low”: Failing or poor grades (anything below 10)</p></li>
+<li><p>“medium”: Passing but average (from 10 to less than 15)</p></li>
+<li><p>“high”: Strong academic performance (15 or higher)</p></li>
+</ul>
+<p>These thresholds are based on Portugal’s grading system (0–20 scale, 10 is passing), which makes this categorization meaningful in context.</p>
+<p>Now we need to repare the PCA outputs (PC1 &amp; PC2) as inputs for modeling.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(student_pca_model<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])  <span class="co"># PC1 and PC2</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>pca_scores<span class="sc">$</span>G3_category <span class="ot">&lt;-</span> student_multinom_data<span class="sc">$</span>G3_category</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(student_pca_model<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])  <span class="co"># PC1 and PC2</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>pca_scores<span class="sc">$</span>G3_category <span class="ot">&lt;-</span> student_multinom_data<span class="sc">$</span>G3_category</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><span class="math inline">\(\textbf{Fit the Multinomial Logistic Regression Model}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Make sure G3_category is a factor</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>pca_scores<span class="sc">$</span>G3_category <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(pca_scores<span class="sc">$</span>G3_category)</span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model using PC1 and PC2 as predictors</span></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>multinom_model <span class="ot">&lt;-</span> <span class="fu">multinom</span>(G3_category <span class="sc">~</span> PC1 <span class="sc">+</span> PC2, <span class="at">data =</span> pca_scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>pca_scores<span class="sc">$</span>G3_category <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(pca_scores<span class="sc">$</span>G3_category)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model using PC1 and PC2 as predictors</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>multinom_model <span class="ot">&lt;-</span> <span class="fu">multinom</span>(G3_category <span class="sc">~</span> PC1 <span class="sc">+</span> PC2, <span class="at">data =</span> pca_scores)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># weights:  12 (6 variable)
 initial  value 570.179778 
@@ -1044,7 +1037,7 @@ iter  10 value 278.623878
 final  value 278.487428 
 converged</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(multinom_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(multinom_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 multinom(formula = G3_category ~ PC1 + PC2, data = pca_scores)
@@ -1063,44 +1056,40 @@ Residual Deviance: 556.9749
 AIC: 568.9749 </code></pre>
 </div>
 </div>
-<p>The model is estimating 12 coefficients in total. This includes intercepts and coefficients for each category in your response variable .</p>
-<p>I used 2 predictor variables (PC1 and PC2), and had 3 outcome classes (low, medium, high), so:</p>
-<p>The model estimates <span class="math inline">\((3 - 1) \times (2 \text{predictors} + 1 \text{intercept}) = 2 × 3 = 6\)</span> weights per outcome.</p>
-<p><span class="math inline">\(570.179778\)</span> is the initial value of the log-likelihood function before any iterations.</p>
-<p><span class="math inline">\(278.487428\)</span> final log-likelihood value after the last iteration</p>
-<p>converged confirms the model successfully found a stable solution where the log-likelihood couldn’t improve much further.</p>
-<p>The bottom line: The model successfully fit the data.It took 10 iterations to converge. We now interpret the model’s coefficients or use it for prediction, evaluation, or visualization.</p>
+<p>The model is estimating 11 coefficients in total. This includes intercepts and coefficients for each category in your response variable. I used 2 predictor variables (<code>PC1</code> and <code>PC2)</code>, and had 3 outcome classes (<code>low</code>, <code>medium</code>, <code>high</code>), so:</p>
+<p>The model estimates <span class="math inline">\((3 - 1) \times (2 \text{(predictors)} + 1 \text{(intercept)}) = 2 × 3 = 6\)</span> weights per outcome.</p>
+<p>The multinomial logistic regression model shows that PC1 has a strong negative association with both the <code>low</code> and <code>medium</code> performance categories, meaning students with higher <code>PC1</code> scores are more likely to be high performers. <code>PC2</code> also negatively impacts the odds of being in a lower-performing group, though more modestly. This confirms that the two principal components effectively capture underlying patterns related to student academic performance.</p>
 <p><span class="math inline">\(\textbf{Interpret the Model}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(multinom_model)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coefficients</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(multinom_model)<span class="sc">$</span>coefficients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       (Intercept)       PC1        PC2
 low      -1.084983 -3.083302 -1.0495486
 medium    2.353355 -1.496623 -0.2717676</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-scores and p-values</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">summary</span>(multinom_model)<span class="sc">$</span>coefficients <span class="sc">/</span> <span class="fu">summary</span>(multinom_model)<span class="sc">$</span>standard.errors</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z)))</span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-scores and p-values</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">summary</span>(multinom_model)<span class="sc">$</span>coefficients <span class="sc">/</span> <span class="fu">summary</span>(multinom_model)<span class="sc">$</span>standard.errors</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z)))</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       (Intercept) PC1          PC2
 low    0.006294987   0 3.487748e-07
 medium 0.000000000   0 1.492603e-02</code></pre>
 </div>
 </div>
-<p>The baseline category is likely “high”.</p>
-<p>Each row gives the coefficients of the log-odds of the low and medium categories versus “high”.</p>
-<p>PC1 is the strongest predictor — large negative coefficients in both comparisons, especially for “low”.</p>
-<p>Individuals with higher PC1 scores are much more likely to be in the “high” category rather than “low” or “medium”.</p>
-<p>PC2 also negatively influences the odds of being in lower categories, but less strongly.</p>
-<p>PC1 (Principal Component 1): p = 0 for both “low” and “medium”: This means PC1 is highly statistically significant in differentiating both “low” and “medium” from the “high” category.</p>
-<p>PC2 is also significant, but less so — especially for distinguishing “medium” vs.&nbsp;“high”.</p>
+<p>The baseline category is likely <code>high</code>.</p>
+<p>Each row gives the coefficients of the log-odds of the <code>low</code> and medium categories versus <code>high</code>.</p>
+<p><code>PC1</code> is the strongest predictor (large negative coefficients) in both comparisons, especially for <code>low</code>.</p>
+<p>Individuals with higher <code>PC1</code> scores are much more likely to be in the <code>high</code> category rather than <code>low</code> or <code>medium</code>.</p>
+<p><code>PC2</code> also negatively influences the odds of being in lower categories, but less strongly.</p>
+<p>The second results where PC1 = 0 for both <code>low</code> and <code>medium</code>, this means <code>PC1</code> is highly statistically significant in differentiating both <code>low</code> and <code>medium</code> from the <code>high</code> category.</p>
+<p><code>PC2</code> is also significant, but less so, especially for distinguishing <code>medium</code> vs.&nbsp;<code>high</code>.</p>
 <p><span class="math inline">\(\textbf{PC1 is a strong predictor.}\)</span></p>
 <p><span class="math inline">\(\textbf{Make Predictions}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(multinom_model, <span class="at">type =</span> <span class="st">"class"</span>)</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(predicted, pca_scores<span class="sc">$</span>G3_category)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(multinom_model, <span class="at">type =</span> <span class="st">"class"</span>)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(predicted, pca_scores<span class="sc">$</span>G3_category)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         
 predicted high low medium
@@ -1120,30 +1109,30 @@ predicted high low medium
 </ul>
 <p><span class="math inline">\(\textbf{Visualize Predicted Grade Categories}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a grid of PC1 and PC2 values</span></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC1 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(pca_scores<span class="sc">$</span>PC1), <span class="fu">max</span>(pca_scores<span class="sc">$</span>PC1), <span class="at">length.out =</span> <span class="dv">100</span>),</span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC2 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(pca_scores<span class="sc">$</span>PC2), <span class="fu">max</span>(pca_scores<span class="sc">$</span>PC2), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict class for each point on the grid</span></span>
-<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(multinom_model, <span class="at">newdata =</span> grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a grid of PC1 and PC2 values</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC1 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(pca_scores<span class="sc">$</span>PC1), <span class="fu">max</span>(pca_scores<span class="sc">$</span>PC1), <span class="at">length.out =</span> <span class="dv">100</span>),</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC2 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(pca_scores<span class="sc">$</span>PC2), <span class="fu">max</span>(pca_scores<span class="sc">$</span>PC2), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict class for each point on the grid</span></span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(multinom_model, <span class="at">newdata =</span> grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">data =</span> grid, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">fill =</span> predicted), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> pca_scores, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G3_category), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"low"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"medium"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"high"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"low"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"medium"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"high"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Multinomial Logistic Regression Decision Boundaries"</span>,</span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Predicted Grade Categories in PC1 vs. PC2 Space"</span>,</span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"PC1"</span>, <span class="at">y =</span> <span class="st">"PC2"</span>, <span class="at">fill =</span> <span class="st">"Predicted"</span>, <span class="at">color =</span> <span class="st">"Actual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">data =</span> grid, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">fill =</span> predicted), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> pca_scores, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G3_category), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"low"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"medium"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"high"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"low"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"medium"</span> <span class="ot">=</span> <span class="st">"orange"</span>, <span class="st">"high"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Multinomial Logistic Regression Decision Boundaries"</span>,</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Predicted Grade Categories in PC1 vs. PC2 Space"</span>,</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"PC1"</span>, <span class="at">y =</span> <span class="st">"PC2"</span>, <span class="at">fill =</span> <span class="st">"Predicted"</span>, <span class="at">color =</span> <span class="st">"Actual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="437proj_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="437proj_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
