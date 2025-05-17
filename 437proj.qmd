@@ -36,12 +36,16 @@ library(dplyr)
 library(ggplot2)
 library(rsample)
 library(tidymodels)
+library(tidyr)
+library(nnet)
 library(tidyverse)
-library(recipes) # don't need the rest of tidymodels
+library(broom)
+library(recipes)
 library(naniar)
 library(softImpute)
 library(broom)
 library(mice)
+library(yardstick)
 ```
 
 | Package                                          | Use                                           |
@@ -53,10 +57,10 @@ library(mice)
 | [ggplot2](https://ggplot2.tidyverse.org/)        | to create nice-looking and informative graphs |
 | [tidymodels](https://tidymodels.tidymodels.org/) | for modeling                                  |
 | [tidyverse](https://tidyverse.tidyverse.org/)    | for creating and using models of all types    |
-| [tibble]()                                       |                                               |
-| [naniar]()                                       |                                               |
-| [softImpute]()                                   |                                               |
-| [mice]()                                         |                                               |
+| [tidyr](https://tidyr.tidyverse.org/)                                       |   for organizing data                                            |
+| [recipes](https://cran.r-project.org/web/packages/recipes/index.html)                                       |         data processing                                      |
+| [nnet](https://cran.r-project.org/web/packages/nnet/index.html)                                   |  for fitting multinomial logistic regression models                                           |
+| [broom](https://cran.r-project.org/web/packages/broom/index.html)                                         |   Tidying the output of models and PCA                                            |
 
 ## Data Description
 

@@ -25,7 +25,7 @@
     "href": "437proj.html#packages-used-in-this-analysis",
     "title": "Statistical Learning Project",
     "section": "Packages Used In This Analysis",
-    "text": "Packages Used In This Analysis\n\nlibrary(here)\nlibrary(readr)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(rsample)\nlibrary(tidymodels)\nlibrary(tidyverse)\nlibrary(recipes) # don't need the rest of tidymodels\nlibrary(naniar)\nlibrary(softImpute)\nlibrary(broom)\nlibrary(mice)\n\n\n\n\nPackage\nUse\n\n\n\n\nhere\nto easily load and save data\n\n\nreadr\nto import the CSV file data\n\n\ndplyr\nto massage and summarize data\n\n\nrsample\nto split data into training and test sets\n\n\nggplot2\nto create nice-looking and informative graphs\n\n\ntidymodels\nfor modeling\n\n\ntidyverse\nfor creating and using models of all types\n\n\ntibble\n\n\n\nnaniar\n\n\n\nsoftImpute\n\n\n\nmice"
+    "text": "Packages Used In This Analysis\n\nlibrary(here)\nlibrary(readr)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(rsample)\nlibrary(tidymodels)\nlibrary(tidyr)\nlibrary(nnet)\nlibrary(tidyverse)\nlibrary(broom)\nlibrary(recipes)\nlibrary(naniar)\nlibrary(softImpute)\nlibrary(broom)\nlibrary(mice)\nlibrary(yardstick)\n\n\n\n\nPackage\nUse\n\n\n\n\nhere\nto easily load and save data\n\n\nreadr\nto import the CSV file data\n\n\ndplyr\nto massage and summarize data\n\n\nrsample\nto split data into training and test sets\n\n\nggplot2\nto create nice-looking and informative graphs\n\n\ntidymodels\nfor modeling\n\n\ntidyverse\nfor creating and using models of all types\n\n\ntidyr\nfor organizing data\n\n\nrecipes\ndata processing\n\n\nnnet\nfor fitting multinomial logistic regression models\n\n\nbroom\nTidying the output of models and PCA"
   },
   {
     "objectID": "437proj.html#data-description",
