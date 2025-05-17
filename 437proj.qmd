@@ -437,11 +437,11 @@ For this section I think that using PCA and multinomial logistic regression and 
 
 Multinomial logistic regression is used when there is more than two categorical response variables. Since I want to distinguish the difference between students who are performing well or not, I will be categorizing final grades `G3` into 3 levels. 
 
-* "low" if `G3` < 10
+* `low` if `G3` < 10
 
-* "medium" if `G3` 10–14
+* `medium` if `G3` 10–14
 
-* "high" if `G3` ≥ 15
+* `high` if `G3` ≥ 15
 
 $\textbf{Why PCA and Linear regression?}$
 
@@ -755,7 +755,6 @@ Each point represents an actual observation:
 By comparing the dot color (actual) with the background color (predicted), we can see where the model is accurate or making mistakes.
 
 We can see some overlap for all classes where the red region contains some orange dots, where the orange region contains some red and green dots, and the green region contains some orange dots. These are the misclassifications.
-
 
 ## Insights
 
