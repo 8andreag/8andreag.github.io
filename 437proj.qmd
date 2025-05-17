@@ -755,7 +755,6 @@ Each point represents an actual observation:
 
 By comparing the dot color (actual) with the background color (predicted), we can see where the model is accurate or making mistakes.
 
-
 We can see some overlap for all classes where the red region contains some orange dots, where the orange region contains some red and green dots, and the green region contains some orange dots. These are the misclassifications.
 
 
