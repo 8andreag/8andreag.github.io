@@ -64,9 +64,9 @@ The dataset used in this project is the Portuguese Student Performance Data Set,
 
 To understand my analysis, it’s also important to have some background knowledge about education systems, student performance metrics, and social factors that influence learning. In Portugal, and for this data in particular the target attribute G3 has a strong correlation with attributes G2 and G1. This occurs because G3 is the final year grade (issued at the 3rd trimester), while G1 and G2 correspond to the 1st and 2nd trimester grades. It is more difficult to predict G3 without G1 and G2. Grades are typically on a 0–20 scale, with 10 as the minimum passing mark. Compared to here in the U.S. high school years are generally sectioned into semesters and students receive letter grades A, B, C, D, or F.
 
-Student performance refers to how well a student meets academic benchmarks, typically measured through grades. Performance can be influenced by various factors, including socioeconomic background, parental involvement, and individual learning styles.
+Throughout this process I will refer to student performance, which describes how well a student meets academic benchmarks measured through their G3 grades. 
 
-Socioeconomic background referes to an individual’s or family’s economic and social position relative to others, based on factors like income, education level, and occupation. Socioeconomic factors and parental education levels may have different impacts due to cultural and systemic differences.
+Socioeconomic background refers to an individual’s or family’s economic and social position relative to others, based on factors like income, education level, and occupation. Socioeconomic factors and parental education levels may have different impacts due to cultural and systemic differences.
 
 ```{r}
 #| label: import data
@@ -91,9 +91,9 @@ $\textbf{The data includes:}$
 
 * $\textbf{Pstatus:}$ parent's cohabitation status (binary: 'T' - living together or 'A' - apart)
 
-* $\textbf{Medu:}$ mother's education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade 3-> secondary education or 4-higher education)
+* $\textbf{Medu:}$ mother's education (numeric: 0 = none, 1 = primary education (4th grade), 2 = 5th to 9th grade 3 =  secondary education or 4 = higher education)
 
-* $\textbf{Fedu:}$ father's education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade, 3 - secondary education or 4- higher education)
+* $\textbf{Fedu:}$ father's education (numeric: 0 = none, 1 = primary education (4th grade), 2 = 5th to 9th grade 3 =  secondary education or 4 = higher education)
 
 * $\textbf{Mjob:}$ mother's job (nominal: 'teacher', 'health' care related, civil 'services' (e.g. administrative or police), 'at_home' or 'other')
 
@@ -105,7 +105,7 @@ $\textbf{The data includes:}$
 
 * $\textbf{traveltime:}$ home to school travel time (numeric: 1 - <15 min., 2 - 15 to 30 min., 3 - 30 min. to 1 hour, or 4 - >1 hour)
 
-* $\textbf{studytime:}$ weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) 
+* $\textbf{studytime:}$ weekly study time (numeric: 1 = less than 2 hours, 2 = 2-5 hours, 3 = 5-10 hours, or 4 = more than 10 hours)  
 
 * $\textbf{failures:}$ number of past class failures (numeric: n if 1<=n<3, else 4)
 
@@ -143,6 +143,28 @@ $\textbf{The data includes:}$
 
 * $\textbf{G3:}$ final grade (numeric: from 0 to 20, output target)
 
+Student performance can be influenced by a variety of factors, in relation to my research question, I consider variables such as study time, parental education, and family support particularly relevant, as they can have a significant impact on a student’s academic success:
+
+* $\textbf{Pstatus:}$ parent's cohabitation status (binary: 'T' = living together or 'A' = apart)
+
+* $\textbf{Medu:}$ mother's education (numeric: 0 = none, 1 = primary education (4th grade), 2 = 5th to 9th grade 3 =  secondary education or 4 = higher education)
+
+* $\textbf{Fedu:}$ father's education (numeric: 0 = none, 1 = primary education (4th grade), 2 = 5th to 9th grade 3 =  secondary education or 4 = higher education)
+
+* $\textbf{guardian:}$ student's guardian (nominal: 'mother', 'father' or 'other')
+
+* $\textbf{studytime:}$ weekly study time (numeric: 1 = less than 2 hours, 2 = 2-5 hours, 3 = 5-10 hours, or 4 = more than 10 hours) 
+
+* $\textbf{famsup:}$ family educational support (binary: yes or no)
+
+* $\textbf{G1:}$ first period grade (numeric: from 0 to 20)
+
+* $\textbf{G2:}$ second period grade (numeric: from 0 to 20)
+
+$\textbf{The main response variable will be:}$
+
+* $\textbf{G3:}$ final grade (numeric: from 0 to 20, output target)
+
 ### Data Limitations
 
 First, there may be biases in data collection methods. For example, self-reported study habits and parental involvement may not always be accurate because students or parents might overestimate or underestimate their efforts. Additionally, this data was collected from specific schools in a different country, which means the findings might not be generalizable to all student populations around the world or even here in the US.
@@ -157,29 +179,6 @@ This means that conclusions from my analysis may not be universally applicable a
 
 ## Data Wrangling
 
-$\textbf{We will be working with just a few varaibles:}$
-
-* $\textbf{Pstatus:}$ parent's cohabitation status (binary: 'T' - living together or 'A' - apart)
-
-* $\textbf{Medu:}$ mother's education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade 3-> secondary education or 4-higher education)
-
-* $\textbf{Fedu:}$ father's education (numeric: 0 - none, 1 - primary education (4th grade), 2- 5th to 9th grade, 3 - secondary education or 4- higher education)
-
-* $\textbf{guardian:}$ student's guardian (nominal: 'mother', 'father' or 'other')
-
-* $\textbf{studytime:}$ weekly study time (numeric: 1 - <2 hours, 2 - 2 to 5 hours, 3 - 5 to 10 hours, or 4 - >10 hours) 
-
-* $\textbf{famsup:}$ family educational support (binary: yes or no)
-
-* $\textbf{G1:}$ first period grade (numeric: from 0 to 20)
-
-* $\textbf{G2:}$ second period grade (numeric: from 0 to 20)
-
-$\textbf{The main response variable will be:}$
-
-* $\textbf{G3:}$ final grade (numeric: from 0 to 20, output target)
-
-These are variables I think are important predictors for academic performance, as study time, parental education and family support can significantly impact a student’s success.
 
 ```{r}
 vis_miss(data[,1:33]) # default row and column order
