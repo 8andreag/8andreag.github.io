@@ -758,7 +758,7 @@ We can see some overlap for all classes where the red region contains some orang
 
 ## Insights
 
-This would be especially troubling for students like me, who come from a background where education was not initially prioritized. A model might view someone like me as unlikely to succeed — but that prediction would miss personal motivation, resilience, and other unmeasured qualities. It raises the question: is a student “underperforming,” or is the model failing to capture their full potential? Predictive models must be used carefully, with awareness of both their value and their limitations, especially in high-stakes educational decisions.
+This would be especially troubling for students like me, who come from a background where education was not initially prioritized. A model might view someone like me as unlikely to succeed, but that prediction would miss personal motivation, resilience, and other unmeasured qualities. It raises the question: is a student “underperforming,” or is the model failing to capture their full potential? Predictive models must be used carefully, with awareness of both their value and their limitations, especially in high-stakes educational decisions.
 
 ### Limitations and Future Work
 
