@@ -816,6 +816,3 @@ Data limitations may include limited feature set and ethical bias. The dataset m
 For the future, incorporating more features could improve model accuracy and fairness. Exploring non-linear models could perform better at predicting and or may be better at handling complex patterns in this data.
 
 By addressing these limitations and exploring the suggestions  for future work, the model's predictive performance and ethical standing can be enhanced, leading to more reliable and equitable outcomes in educational settings.
-
-
-
