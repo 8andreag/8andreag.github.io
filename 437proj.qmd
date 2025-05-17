@@ -758,8 +758,62 @@ We can see some overlap for all classes where the red region contains some orang
 
 ## Insights
 
-This would be especially troubling for students like me, who come from a background where education was not initially prioritized. A model might view someone like me as unlikely to succeed, but that prediction would miss personal motivation, resilience, and other unmeasured qualities. It raises the question: is a student “underperforming,” or is the model failing to capture their full potential? Predictive models must be used carefully, with awareness of both their value and their limitations, especially in high-stakes educational decisions.
-123456789
+My main goal was to differentiate key factors in students that are getting good grades vs. students that are not doing so good based on student performance groups
+
+After applying Principal Component Analysis (`PCA`) to reduce dimensionality and using the first two principal components (`PC1` and `PC2`) as predictors in a multinomial logistic regression model, I gained the following insights:
+
+$\textbf{High-Performing Students}$
+Students that tend to score higher on PC1, are strongly influenced by:
+
+* Higher G1 and G2 scores (previous academic performance)
+
+* Higher parental education levels (Fedu, Medu)
+
+They also tend to have more traditional or stable family structures, based on lower scores on PC2, which is loosely associated with study time, and guardianship. High performers are more academically consistent and often come from more supportive home environments.
+
+$\textbf{Medium-Performing Students}$
+
+This is the most accurately classified group in the model.These students likely fall in the middle range of both PC1 and PC2, suggesting:
+
+* Adequate academic performance
+
+* Moderate levels of support
+
+They may not show extreme patterns in severe lack of support but also not top academic achievers.
+
+$\textbf{Low-Performing Students}$
+
+These students generally have lower PC1 scores, which indicates:
+
+* Poor performance on G1 and G2 (predictors of G3)
+
+* Lower levels of parental education
+
+Many are also associated with higher PC2 values, which correspond to:
+
+*Possibly less support at home 
+
+The model had the hardest time correctly identifying these students, possibly because their characteristics overlap with others, or due to subtle unmeasured factors like mental health or external responsibilities.
+
+The model achieved an overall accuracy of approximately 76.9%, indicating a reasonable performance in classifying students into `low`, `medium`, and `high` performance categories. To illustrate these findings, I included a confusion matrix and a PCA Biplot.
+
+This matrix displays the number of correct and incorrect predictions made by the model for each category. The biplot shows the distribution of students in the `PC1`-`PC2` space, colored by their actual performance categories.
+
+The PCA biplot reveals that students are distributed in a way that allows for some separation between performance categories, particularly for `medium` performers. However, there's notable overlap between high and low performers, which may contribute to the model's difficulty in accurately classifying these groups.
+
 ### Limitations and Future Work
 
-### Reflection (Optional Subsection)
+Three major limitations are misclassification of high and low Performers, information Loss from PCA, and assumption of linearity. 
+
+The model has a higher error rate in predicting high and low performers, possibly due to overlapping features in the PCA-reduced space that do not capture the nuances distinguishing these groups.
+
+While PCA helps in reducing dimensionality, it may also discard features that are critical for classification, especially if those features have low variance but high predictive power.
+
+Both PCA and multinomial logistic regression assume linear relationships, which may not capture complex, non-linear interactions present in the data.
+
+Data limitations may include limited feature set and ethical bias. The dataset may lack variables that significantly influence student performance, such as psychological factors, extracurricular activities, or detailed socioeconomic indicators. The model's predictions could also inadvertently reinforce existing biases if certain groups are underrepresented or misrepresented in the data.
+
+For the future, incorporating more features could improve model accuracy and fairness. Exploring non-linear models could perform better at predicting and or may be better at handling complex patterns in this data.
+
+By addressing these limitations and exploring the suggestions  for future work, the model's predictive performance and ethical standing can be enhanced, leading to more reliable and equitable outcomes in educational settings.
+
