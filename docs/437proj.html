@@ -189,7 +189,6 @@ window.Quarto = {
   <li><a href="#insights" id="toc-insights" class="nav-link" data-scroll-target="#insights">Insights</a>
   <ul class="collapse">
   <li><a href="#limitations-and-future-work" id="toc-limitations-and-future-work" class="nav-link" data-scroll-target="#limitations-and-future-work">Limitations and Future Work</a></li>
-  <li><a href="#reflection-optional-subsection" id="toc-reflection-optional-subsection" class="nav-link" data-scroll-target="#reflection-optional-subsection">Reflection (Optional Subsection)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1161,12 +1160,42 @@ predicted high low medium
 </section>
 <section id="insights" class="level2">
 <h2 class="anchored" data-anchor-id="insights">Insights</h2>
-<p>This would be especially troubling for students like me, who come from a background where education was not initially prioritized. A model might view someone like me as unlikely to succeed, but that prediction would miss personal motivation, resilience, and other unmeasured qualities. It raises the question: is a student “underperforming,” or is the model failing to capture their full potential? Predictive models must be used carefully, with awareness of both their value and their limitations, especially in high-stakes educational decisions.</p>
+<p>My main goal was to differentiate key factors in students that are getting good grades vs.&nbsp;students that are not doing so good based on student performance groups</p>
+<p>After applying Principal Component Analysis (<code>PCA</code>) to reduce dimensionality and using the first two principal components (<code>PC1</code> and <code>PC2</code>) as predictors in a multinomial logistic regression model, I gained the following insights:</p>
+<p><span class="math inline">\(\textbf{High-Performing Students}\)</span> Students that tend to score higher on PC1, are strongly influenced by:</p>
+<ul>
+<li><p>Higher G1 and G2 scores (previous academic performance)</p></li>
+<li><p>Higher parental education levels (Fedu, Medu)</p></li>
+</ul>
+<p>They also tend to have more traditional or stable family structures, based on lower scores on PC2, which is loosely associated with study time, and guardianship. High performers are more academically consistent and often come from more supportive home environments.</p>
+<p><span class="math inline">\(\textbf{Medium-Performing Students}\)</span></p>
+<p>This is the most accurately classified group in the model.These students likely fall in the middle range of both PC1 and PC2, suggesting:</p>
+<ul>
+<li><p>Adequate academic performance</p></li>
+<li><p>Moderate levels of support</p></li>
+</ul>
+<p>They may not show extreme patterns in severe lack of support but also not top academic achievers.</p>
+<p><span class="math inline">\(\textbf{Low-Performing Students}\)</span></p>
+<p>These students generally have lower PC1 scores, which indicates:</p>
+<ul>
+<li><p>Poor performance on G1 and G2 (predictors of G3)</p></li>
+<li><p>Lower levels of parental education</p></li>
+</ul>
+<p>Many are also associated with higher PC2 values, which correspond to:</p>
+<p>*Possibly less support at home</p>
+<p>The model had the hardest time correctly identifying these students, possibly because their characteristics overlap with others, or due to subtle unmeasured factors like mental health or external responsibilities.</p>
+<p>The model achieved an overall accuracy of approximately 76.9%, indicating a reasonable performance in classifying students into <code>low</code>, <code>medium</code>, and <code>high</code> performance categories. To illustrate these findings, I included a confusion matrix and a PCA Biplot.</p>
+<p>This matrix displays the number of correct and incorrect predictions made by the model for each category. The biplot shows the distribution of students in the <code>PC1</code>-<code>PC2</code> space, colored by their actual performance categories.</p>
+<p>The PCA biplot reveals that students are distributed in a way that allows for some separation between performance categories, particularly for <code>medium</code> performers. However, there’s notable overlap between high and low performers, which may contribute to the model’s difficulty in accurately classifying these groups.</p>
 <section id="limitations-and-future-work" class="level3">
 <h3 class="anchored" data-anchor-id="limitations-and-future-work">Limitations and Future Work</h3>
-</section>
-<section id="reflection-optional-subsection" class="level3">
-<h3 class="anchored" data-anchor-id="reflection-optional-subsection">Reflection (Optional Subsection)</h3>
+<p>Three major limitations are misclassification of high and low Performers, information Loss from PCA, and assumption of linearity.</p>
+<p>The model has a higher error rate in predicting high and low performers, possibly due to overlapping features in the PCA-reduced space that do not capture the nuances distinguishing these groups.</p>
+<p>While PCA helps in reducing dimensionality, it may also discard features that are critical for classification, especially if those features have low variance but high predictive power.</p>
+<p>Both PCA and multinomial logistic regression assume linear relationships, which may not capture complex, non-linear interactions present in the data.</p>
+<p>Data limitations may include limited feature set and ethical bias. The dataset may lack variables that significantly influence student performance, such as psychological factors, extracurricular activities, or detailed socioeconomic indicators. The model’s predictions could also inadvertently reinforce existing biases if certain groups are underrepresented or misrepresented in the data.</p>
+<p>For the future, incorporating more features could improve model accuracy and fairness. Exploring non-linear models could perform better at predicting and or may be better at handling complex patterns in this data.</p>
+<p>By addressing these limitations and exploring the suggestions for future work, the model’s predictive performance and ethical standing can be enhanced, leading to more reliable and equitable outcomes in educational settings.</p>
 
 
 </section>
