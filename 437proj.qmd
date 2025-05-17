@@ -722,7 +722,6 @@ grid$predicted <- predict(multinom_model, newdata = grid)
 
 ```
 
-
 ```{r}
 ggplot() +
   geom_tile(data = grid, aes(x = PC1, y = PC2, fill = predicted), alpha = 0.3) +
