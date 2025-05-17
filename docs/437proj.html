@@ -788,9 +788,9 @@ G3 0.8263871 0.9185480 1.0000000</code></pre>
 <p>For this section I think that using PCA and multinomial logistic regression and clustering are good choices for this data, especially since my goal is not just exploration but also prediction.</p>
 <p>Multinomial logistic regression is used when there is more than two categorical response variables. Since I want to distinguish the difference between students who are performing well or not, I will be categorizing final grades <code>G3</code> into 3 levels.</p>
 <ul>
-<li><p>“low” if <code>G3</code> &lt; 10</p></li>
-<li><p>“medium” if <code>G3</code> 10–14</p></li>
-<li><p>“high” if <code>G3</code> ≥ 15</p></li>
+<li><p><code>low</code> if <code>G3</code> &lt; 10</p></li>
+<li><p><code>medium</code> if <code>G3</code> 10–14</p></li>
+<li><p><code>high</code> if <code>G3</code> ≥ 15</p></li>
 </ul>
 <p><span class="math inline">\(\textbf{Why PCA and Linear regression?}\)</span></p>
 <p>PCA is an unsupervised learning technique that helps uncover hidden structure in the data. There are a lot of variables and we want to get the most out of our data without it being overly complicated, PCA reduces dimensions by identifying principal components that explain the most variance in the data. It helps reveal underlying patterns while simplifying the feature space.</p>
@@ -1107,18 +1107,24 @@ predicted high low medium
 <li><p>16 misclassified as low</p></li>
 <li><p>303 correctly predicted as medium</p></li>
 </ul>
+<p>Calculating the accuracy:</p>
+<p><span class="math display">\[\text{Accuracy} = \frac{\text{Correct Predictions}}{\text{Total Predictions}}\]</span> we obtain</p>
+<ul>
+<li><p><code>high</code>: <span class="math inline">\(\frac{65}{110}\approx 59\%\)</span></p></li>
+<li><p><code>medium</code>: <span class="math inline">\(\frac{31}{70}\approx 44\%\)</span></p></li>
+<li><p><code>low</code>: <span class="math inline">\(\frac{303}{339}\approx89\%\)</span></p></li>
+</ul>
+<p>The model performs best on <code>medium</code>, which is likely because it is the most frequent class. It performs worst on <code>low</code>, meaning it’s more likely to miss failing students.</p>
 <p><span class="math inline">\(\textbf{Visualize Predicted Grade Categories}\)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a grid of PC1 and PC2 values</span></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC1 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(pca_scores<span class="sc">$</span>PC1), <span class="fu">max</span>(pca_scores<span class="sc">$</span>PC1), <span class="at">length.out =</span> <span class="dv">100</span>),</span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC2 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(pca_scores<span class="sc">$</span>PC2), <span class="fu">max</span>(pca_scores<span class="sc">$</span>PC2), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict class for each point on the grid</span></span>
-<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(multinom_model, <span class="at">newdata =</span> grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC1 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(pca_scores<span class="sc">$</span>PC1), <span class="fu">max</span>(pca_scores<span class="sc">$</span>PC1), <span class="at">length.out =</span> <span class="dv">100</span>),</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">PC2 =</span> <span class="fu">seq</span>(<span class="fu">min</span>(pca_scores<span class="sc">$</span>PC2), <span class="fu">max</span>(pca_scores<span class="sc">$</span>PC2), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>predicted <span class="ot">&lt;-</span> <span class="fu">predict</span>(multinom_model, <span class="at">newdata =</span> grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -1137,31 +1143,25 @@ predicted high low medium
 </div>
 </div>
 </div>
-<p>Each color in the background represents the model’s predicted class for that region in the PC1–PC2 space:</p>
+<p>Each color in the background represents the model’s predicted class for that region in the <code>PC1</code>–<code>PC2</code> space:</p>
 <ul>
 <li><p>Green area: model predicts high</p></li>
 <li><p>Orange area: model predicts medium</p></li>
 <li><p>Red area: model predicts low</p></li>
 </ul>
-<p>These regions are based on the predicted class from the model for a grid of PC1 and PC2 values. They represent the decision boundaries — where the model switches between predicting “low”, “medium”, or “high”.</p>
+<p>These regions are based on the predicted class from the model for a grid of <code>PC1</code> and <code>PC2</code> values. They represent the decision boundaries, where the model switches between predicting <code>low</code>, <code>medium</code>, or <code>high</code> <code>G3</code> grades.</p>
 <p>Each point represents an actual observation:</p>
-<p>Green dots: true label is high</p>
-<p>Red dots: true label is low</p>
-<p>Orange dots: true label is medium</p>
-<p>By comparing the dot color (actual) with the background color (predicted), you can see where the model is accurate or making mistakes.</p>
-<p>Most accurate region: “high” The green region is dominated by green dots (model does well predicting high grades). This aligns with the confusion matrix where “high” had <span class="math inline">\(59\%\)</span> accuracy.</p>
-<p>Some overlap for “medium” The orange area contains mostly orange dots, but also some red and green.</p>
-<p>This explains why “medium” had high accuracy <span class="math inline">\(89\%\)</span>, but there were still some misclassifications from adjacent classes.</p>
-<p>Weakest predictions: “low” The red region includes a mix of red and orange dots, with fewer points overall.</p>
-<p>“Low” is predicted only in a small region of the PC space, and it overlaps with actual “medium” points (leads to misclassifications, which you saw in the confusion matrix <span class="math inline">\(44\ \)</span>accuracy).</p>
-<p>Background regions: What category the model would predict based on any combination of PC1 and PC2.</p>
-<p>Points: Actual students, colored by their true G3_category</p>
-<p>Areas where colors don’t match show misclassifications, helping you assess model fit visually.</p>
-<p><span class="math inline">\(\textbf{Clustering}\)</span></p>
+<ul>
+<li><p>Green dots: true grade is high</p></li>
+<li><p>Red dots: true grade is low</p></li>
+<li><p>Orange dots: true grade is medium</p></li>
+</ul>
+<p>By comparing the dot color (actual) with the background color (predicted), we can see where the model is accurate or making mistakes.</p>
+<p>We can see some overlap for all classes where the red region contains some orange dots, where the orange region contains some red and green dots, and the green region contains some orange dots. These are the misclassifications.</p>
 </section>
 <section id="insights" class="level2">
 <h2 class="anchored" data-anchor-id="insights">Insights</h2>
-<p>This would be especially troubling for students like me, who come from a background where education was not initially prioritized. A model might view someone like me as unlikely to succeed — but that prediction would miss personal motivation, resilience, and other unmeasured qualities. It raises the question: is a student “underperforming,” or is the model failing to capture their full potential? Predictive models must be used carefully, with awareness of both their value and their limitations, especially in high-stakes educational decisions.</p>
+<p>This would be especially troubling for students like me, who come from a background where education was not initially prioritized. A model might view someone like me as unlikely to succeed, but that prediction would miss personal motivation, resilience, and other unmeasured qualities. It raises the question: is a student “underperforming,” or is the model failing to capture their full potential? Predictive models must be used carefully, with awareness of both their value and their limitations, especially in high-stakes educational decisions.</p>
 <section id="limitations-and-future-work" class="level3">
 <h3 class="anchored" data-anchor-id="limitations-and-future-work">Limitations and Future Work</h3>
 </section>
