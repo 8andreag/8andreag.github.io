@@ -756,6 +756,17 @@ By comparing the dot color (actual) with the background color (predicted), we ca
 
 We can see some overlap for all classes where the red region contains some orange dots, where the orange region contains some red and green dots, and the green region contains some orange dots. These are the misclassifications.
 
+We can apply the same PCA transformation to the test set.
+```{r test set}
+# Categorize G3 in the test set
+student_test <- student_test |>
+  mutate(G3_category = case_when(
+    G3 < 10 ~ "low",
+    G3 >= 10 & G3 < 15 ~ "medium",
+    G3 >= 15 ~ "high"
+  ))
+```
+
 ## Insights
 
 This would be especially troubling for students like me, who come from a background where education was not initially prioritized. A model might view someone like me as unlikely to succeed — but that prediction would miss personal motivation, resilience, and other unmeasured qualities. It raises the question: is a student “underperforming,” or is the model failing to capture their full potential? Predictive models must be used carefully, with awareness of both their value and their limitations, especially in high-stakes educational decisions.
